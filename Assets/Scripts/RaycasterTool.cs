@@ -23,6 +23,7 @@ public class RaycasterTool : MonoBehaviour
     public float Resolution = 47.8f;
     public float RefreshRate;
     public float Dist = 1000;
+    public float DistFallOff = 100;
     public LayerMask rayMask;
     private float _timer = 0f;
     private List<Ray> _raycasters;
@@ -80,53 +81,143 @@ public class RaycasterTool : MonoBehaviour
     {
         List<Vector3> retList = new List<Vector3>();
 
-
-        for(int i= 1; i < _castObjects.Count - 2; i++)
+        for (int i = 0; i < _castObjects.Count - 1; i++)
         {
-            if (!_castObjects[i]._hit.collider)
+            if (_castObjects[i]._hit.collider)
             {
-                if(_castObjects[i - 1]._hit.collider)
+                for(int k=1; k < 5; k++)
                 {
-                    Vector3 pos = _castObjects[i - 1]._hit.point - _castObjects[i]._ray.GetPoint(_castObjects[i - 1]._hit.distance*1.5f);
-                    Logger.Log(pos);
-                    retList.Add(pos);
+                    Vector3 dir = -_castObjects[i]._hit.normal * (k*10);
+                    if(!Physics.CheckSphere(_castObjects[i]._hit.point+dir, 0.1f))
+                    {
+                        Vector3 pos = _castObjects[i]._hit.point + dir;
+                        pos.y = this.transform.position.y;
+                        retList.Add(pos);
+                    }
                 }
-            }
-
-            if (!_castObjects[i-1]._hit.collider)
-            {
-                if (_castObjects[i]._hit.collider)
-                {
-                    Vector3 pos = _castObjects[i]._hit.point - _castObjects[i - 1]._ray.GetPoint(_castObjects[i]._hit.distance*1.5f);
-                    Logger.Log(pos);
-                    retList.Add(pos);
-                }
+                
             }
         }
         return retList;
+    }
+
+    public List<Vector3> AllHitPositions()
+    {
+        List<Vector3> retList = new List<Vector3>();
+
+        for (int i = 0; i < _castObjects.Count - 1; i++)
+        {
+            if (_castObjects[i]._hit.collider)
+            {
+                Vector3 pos = _castObjects[i]._hit.point;
+                pos.y = this.transform.position.y;
+                retList.Add(pos);
+            }
+        }
+        return retList;
+    }
+
+    public List<Vector3> AllRandomOnRays()
+    {
+        List<Vector3> retList = new List<Vector3>();
+
+
+        for (int i = 0; i < _castObjects.Count - 1; i++)
+        {
+            Vector3 pos = _castObjects[i]._ray.GetPoint(Random.Range(DistFallOff, DistFallOff*2));
+            pos.y = this.transform.position.y;
+            retList.Add(pos);
+        }
+        return retList;
+    }
+
+    bool IsLookingAtObject(Vector3 dir1, Vector3 dir2)
+    {
+        return (Vector3.Dot(dir1, dir2) < 0) ? false: true;
+    }
+
+    public List<Vector3> HiddenSpawnPosition()
+    {
+        List<Vector3> cornerAdj = AllHitAdjPositions();
+        List<Vector3> retList = new List<Vector3>();
+
+        foreach (Vector3 v in cornerAdj)
+        {
+            RaycastHit hit;
+            Ray r = new Ray(v, (this.transform.position-v).normalized);
+            if ((v - this.transform.position).sqrMagnitude > DistFallOff)
+            {
+                retList.Add(v);
+            }
+        }
+
+        return retList;
+    }
+
+    public List<Vector3> BehindPlayerSpawnPosition()
+    {
+        List<Vector3> cornerAdj = AllRandomOnRays();
+        List<Vector3> retList = new List<Vector3>();
+
+        foreach (Vector3 v in cornerAdj)
+        {
+            RaycastHit hit;
+            Ray r = new Ray(v, (this.transform.position-v).normalized);
+            if (!IsLookingAtObject(this.transform.forward, -r.direction) && 
+                (v-this.transform.position).sqrMagnitude > DistFallOff)
+            {
+                retList.Add(v);
+            }
+        }
+
+        return retList;
+    }
+
+    public Vector3 RandomHiddenSpawnPos()
+    {
+        List<Vector3> hS = HiddenSpawnPosition();
+
+        return (hS.Count != 0) ? hS[Random.Range(0, hS.Count)] : Vector3.zero;
+    }
+
+    public Vector3 RandomBehindPlayerSpawnPos()
+    {
+        List<Vector3> hS = BehindPlayerSpawnPosition();
+
+        return (hS.Count != 0) ? hS[Random.Range(0, hS.Count)] : Vector3.zero;
     }
 
     private void OnDrawGizmos()
     {
         if (Logger.Active)
         {
+            if (_castObjects.Count == 0) return;
+            
             foreach (RaycasterObj r in _castObjects)
             {
-                Gizmos.color = new Color(1, 0, 0, 1);
+                Gizmos.color = new Color(1, 0, 0, 0.5f);
                 Gizmos.DrawRay(transform.position, (r._hit.point - transform.position).normalized * (r._hit.distance));
-                Gizmos.color = new Color(1, 1, 1, 0.5f);
+                Gizmos.color = new Color(0, 1, 0, 0.1f);
                 Gizmos.DrawRay(r._ray.origin, r._ray.direction * Dist);
 
                 Gizmos.color = new Color(1, 1, 0, 1f);
                 Gizmos.DrawWireSphere(r._hit.point, 0.1f);
             }
 
-            List<Vector3> corners = AllHitAdjPositions();
+            List<Vector3> corners = HiddenSpawnPosition();
 
             foreach(Vector3 v in corners)
             {
-                Gizmos.color = new Color(0, 0, 1, 1f);
-                Gizmos.DrawWireSphere(v, 0.5f);
+                Gizmos.color = new Color(1, 0, 0, 1);
+                Gizmos.DrawWireSphere(v, 0.2f);
+            }
+
+            List<Vector3> behind = BehindPlayerSpawnPosition();
+
+            foreach (Vector3 v in behind)
+            {
+                Gizmos.color = new Color(0, 1, 0, 1);
+                Gizmos.DrawWireSphere(v, 0.2f);
             }
         }
     }
