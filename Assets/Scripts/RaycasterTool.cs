@@ -137,7 +137,7 @@ public class RaycasterTool : MonoBehaviour
 
         for (int i = 0; i < _castObjects.Count - 1; i++)
         {
-            Vector3 pos = _castObjects[i]._ray.GetPoint(Random.Range(15, DistFallOff));
+            Vector3 pos = _castObjects[i]._ray.GetPoint(Random.Range(1, 5));
             pos.y = this.transform.position.y;
             retList.Add(pos);
         }
