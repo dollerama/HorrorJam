@@ -11,7 +11,8 @@ static public class Utility
 public enum ScarePositionType
 {
     Hidden,
-    BehindPlayer
+    BehindPlayer,
+    CloseBehindPlayer
 }
 
 [System.Serializable]
@@ -35,6 +36,7 @@ public class ScareObject
         switch(ScarePosType)
         {
             case ScarePositionType.BehindPlayer: return PlayerCaster.RandomBehindPlayerSpawnPos();
+            case ScarePositionType.CloseBehindPlayer: return PlayerCaster.RandomCloseBehindPlayerSpawnPos();
             case ScarePositionType.Hidden: return PlayerCaster.RandomHiddenSpawnPos(); 
         }
         return Vector3.zero;

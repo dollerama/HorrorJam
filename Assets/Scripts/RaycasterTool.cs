@@ -131,6 +131,19 @@ public class RaycasterTool : MonoBehaviour
         return retList;
     }
 
+    public List<Vector3> CloseOnRays()
+    {
+        List<Vector3> retList = new List<Vector3>();
+
+        for (int i = 0; i < _castObjects.Count - 1; i++)
+        {
+            Vector3 pos = _castObjects[i]._ray.GetPoint(Random.Range(15, DistFallOff));
+            pos.y = this.transform.position.y;
+            retList.Add(pos);
+        }
+        return retList;
+    }
+
     public List<Vector3> HiddenSpawnPosition()
     {
         List<Vector3> cornerAdj = AllHitAdjPositions();
@@ -157,9 +170,27 @@ public class RaycasterTool : MonoBehaviour
         foreach (Vector3 v in cornerAdj)
         {
             RaycastHit hit;
-            Ray r = new Ray(v, (this.transform.position-v).normalized);
-            if (!Utility.IsLookingAtObject(this.transform.forward, -r.direction) && 
-                (v-this.transform.position).sqrMagnitude > DistFallOff)
+            Ray r = new Ray(v, (this.transform.position - v).normalized);
+            if (!Utility.IsLookingAtObject(this.transform.forward, -r.direction) &&
+                (v - this.transform.position).sqrMagnitude > DistFallOff)
+            {
+                retList.Add(v);
+            }
+        }
+
+        return retList;
+    }
+
+    public List<Vector3> CloseBehindPlayerSpawnPosition()
+    {
+        List<Vector3> cornerAdj = CloseOnRays();
+        List<Vector3> retList = new List<Vector3>();
+
+        foreach (Vector3 v in cornerAdj)
+        {
+            RaycastHit hit;
+            Ray r = new Ray(v, (this.transform.position - v).normalized);
+            if (!Utility.IsLookingAtObject(this.transform.forward, -r.direction))
             {
                 retList.Add(v);
             }
@@ -178,6 +209,13 @@ public class RaycasterTool : MonoBehaviour
     public Vector3 RandomBehindPlayerSpawnPos()
     {
         List<Vector3> hS = BehindPlayerSpawnPosition();
+
+        return (hS.Count != 0) ? hS[Random.Range(0, hS.Count)] : Vector3.zero;
+    }
+
+    public Vector3 RandomCloseBehindPlayerSpawnPos()
+    {
+        List<Vector3> hS = CloseBehindPlayerSpawnPosition();
 
         return (hS.Count != 0) ? hS[Random.Range(0, hS.Count)] : Vector3.zero;
     }
@@ -210,6 +248,14 @@ public class RaycasterTool : MonoBehaviour
             List<Vector3> behind = BehindPlayerSpawnPosition();
 
             foreach (Vector3 v in behind)
+            {
+                Gizmos.color = new Color(0, 1, 0, 1);
+                Gizmos.DrawWireSphere(v, 0.2f);
+            }
+
+            List<Vector3> close = CloseBehindPlayerSpawnPosition();
+
+            foreach (Vector3 v in close)
             {
                 Gizmos.color = new Color(0, 1, 0, 1);
                 Gizmos.DrawWireSphere(v, 0.2f);
