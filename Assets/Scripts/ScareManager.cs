@@ -2,6 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+static public class Utility
+{
+    static public bool IsLookingAtObject(Vector3 dir1, Vector3 dir2) => (Vector3.Dot(dir1, dir2) < 0) ? false : true;
+}
+
 [System.Serializable]
 public enum ScarePositionType
 {
@@ -105,9 +110,12 @@ public class ScareManager : MonoBehaviour
 
     public void Tick()
     {
-        foreach(ScareObject so in ScareObjects)
+        for (int i = 0; i < Intensity * 10; i++)
         {
-            so.SpawnWithChance(PlayerCaster);
+            foreach (ScareObject so in ScareObjects)
+            {
+                so.SpawnWithChance(PlayerCaster);
+            }
         }
     }
 

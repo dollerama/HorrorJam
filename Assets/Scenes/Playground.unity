@@ -157,16 +157,16 @@ MonoBehaviour:
   Origin: {x: 0, y: 0, z: 0}
   AreaSize: {x: 2, y: 2}
   ActiveGridCell: {fileID: 0}
-  Intensity: 0.9
-  RateMinMax: {x: 5, y: 0.1}
+  Intensity: 0.811
+  RateMinMax: {x: 7, y: 0.01}
   ScareObjects:
   - ScarePosType: 1
     Template: {fileID: 5244229435226729857, guid: 4ba344cf38d85d349826b2ba64ec3320, type: 3}
-    Chance: 0.522
+    Chance: 0.177
     Life: 5
   - ScarePosType: 0
     Template: {fileID: 5244229435226729857, guid: 6b66cc661b57c7a4ebbc778795783af4, type: 3}
-    Chance: 0.507
+    Chance: 0.944
     Life: 5
 --- !u!4 &228671686
 Transform:

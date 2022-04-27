@@ -87,7 +87,7 @@ public class RaycasterTool : MonoBehaviour
             {
                 for(int k=1; k < 5; k++)
                 {
-                    Vector3 dir = -_castObjects[i]._hit.normal * (k*10);
+                    Vector3 dir = -_castObjects[i]._hit.normal * (k);
                     if(!Physics.CheckSphere(_castObjects[i]._hit.point+dir, 0.1f))
                     {
                         Vector3 pos = _castObjects[i]._hit.point + dir;
@@ -131,11 +131,6 @@ public class RaycasterTool : MonoBehaviour
         return retList;
     }
 
-    bool IsLookingAtObject(Vector3 dir1, Vector3 dir2)
-    {
-        return (Vector3.Dot(dir1, dir2) < 0) ? false: true;
-    }
-
     public List<Vector3> HiddenSpawnPosition()
     {
         List<Vector3> cornerAdj = AllHitAdjPositions();
@@ -163,7 +158,7 @@ public class RaycasterTool : MonoBehaviour
         {
             RaycastHit hit;
             Ray r = new Ray(v, (this.transform.position-v).normalized);
-            if (!IsLookingAtObject(this.transform.forward, -r.direction) && 
+            if (!Utility.IsLookingAtObject(this.transform.forward, -r.direction) && 
                 (v-this.transform.position).sqrMagnitude > DistFallOff)
             {
                 retList.Add(v);
