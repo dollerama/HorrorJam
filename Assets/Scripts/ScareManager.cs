@@ -17,6 +17,8 @@ public class ScareManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Logger.Active = true;
+
         Areas = new GameObject[(int)AreaSize.x,(int)AreaSize.y];
 
         Vector3 _origin = Origin;

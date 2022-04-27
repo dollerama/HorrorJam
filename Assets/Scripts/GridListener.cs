@@ -11,6 +11,7 @@ public class GridListener : MonoBehaviour
     public void Start()
     {
         Contents = new List<GameObject>();
+        this.gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
         _init = false;
     }
 
