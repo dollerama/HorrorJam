@@ -34,6 +34,9 @@ public class RaycasterTool : MonoBehaviour
     void Start()
     {
         TAU = Mathf.PI * 2;
+        _castObjects = new List<RaycasterObj>();
+        _rayhits = new List<RaycastHit>();
+        _raycasters = new List<Ray>();
     }
 
     // Update is called once per frame
@@ -81,6 +84,8 @@ public class RaycasterTool : MonoBehaviour
     {
         List<Vector3> retList = new List<Vector3>();
 
+        if (_castObjects.Count <= 0) return retList;
+
         for (int i = 0; i < _castObjects.Count - 1; i++)
         {
             if (_castObjects[i]._hit.collider)
@@ -121,12 +126,14 @@ public class RaycasterTool : MonoBehaviour
     {
         List<Vector3> retList = new List<Vector3>();
 
-
-        for (int i = 0; i < _castObjects.Count - 1; i++)
+        if (_castObjects.Count > 0)
         {
-            Vector3 pos = _castObjects[i]._ray.GetPoint(Random.Range(DistFallOff, DistFallOff*2));
-            pos.y = this.transform.position.y;
-            retList.Add(pos);
+            for (int i = 0; i < _castObjects.Count - 1; i++)
+            {
+                Vector3 pos = _castObjects[i]._ray.GetPoint(Random.Range(DistFallOff, DistFallOff * 2));
+                pos.y = this.transform.position.y;
+                retList.Add(pos);
+            }
         }
         return retList;
     }
@@ -135,7 +142,7 @@ public class RaycasterTool : MonoBehaviour
     {
         List<Vector3> retList = new List<Vector3>();
 
-        for (int i = 0; i < _castObjects.Count - 1; i++)
+        for (int i = 0; i < _castObjects.Count; i++)
         {
             Vector3 pos = _castObjects[i]._ray.GetPoint(Random.Range(1, 5));
             pos.y = this.transform.position.y;
@@ -220,46 +227,46 @@ public class RaycasterTool : MonoBehaviour
         return (hS.Count != 0) ? hS[Random.Range(0, hS.Count)] : Vector3.zero;
     }
 
-    private void OnDrawGizmos()
-    {
-        if (Logger.Active)
-        {
-            if (_castObjects.Count == 0) return;
+    //private void OnDrawGizmos()
+    //{
+    //    if (Logger.Active)
+    //    {
+    //        if (_castObjects.Count == 0) return;
             
-            foreach (RaycasterObj r in _castObjects)
-            {
-                Gizmos.color = new Color(1, 0, 0, 0.5f);
-                Gizmos.DrawRay(transform.position, (r._hit.point - transform.position).normalized * (r._hit.distance));
-                Gizmos.color = new Color(0, 1, 0, 0.1f);
-                Gizmos.DrawRay(r._ray.origin, r._ray.direction * Dist);
+    //        foreach (RaycasterObj r in _castObjects)
+    //        {
+    //            Gizmos.color = new Color(1, 0, 0, 0.5f);
+    //            Gizmos.DrawRay(transform.position, (r._hit.point - transform.position).normalized * (r._hit.distance));
+    //            Gizmos.color = new Color(0, 1, 0, 0.1f);
+    //            Gizmos.DrawRay(r._ray.origin, r._ray.direction * Dist);
 
-                Gizmos.color = new Color(1, 1, 0, 1f);
-                Gizmos.DrawWireSphere(r._hit.point, 0.1f);
-            }
+    //            Gizmos.color = new Color(1, 1, 0, 1f);
+    //            Gizmos.DrawWireSphere(r._hit.point, 0.1f);
+    //        }
 
-            List<Vector3> corners = HiddenSpawnPosition();
+    //        List<Vector3> corners = HiddenSpawnPosition();
 
-            foreach(Vector3 v in corners)
-            {
-                Gizmos.color = new Color(1, 0, 0, 1);
-                Gizmos.DrawWireSphere(v, 0.2f);
-            }
+    //        foreach(Vector3 v in corners)
+    //        {
+    //            Gizmos.color = new Color(1, 0, 0, 1);
+    //            Gizmos.DrawWireSphere(v, 0.2f);
+    //        }
 
-            List<Vector3> behind = BehindPlayerSpawnPosition();
+    //        List<Vector3> behind = BehindPlayerSpawnPosition();
 
-            foreach (Vector3 v in behind)
-            {
-                Gizmos.color = new Color(0, 1, 0, 1);
-                Gizmos.DrawWireSphere(v, 0.2f);
-            }
+    //        foreach (Vector3 v in behind)
+    //        {
+    //            Gizmos.color = new Color(0, 1, 0, 1);
+    //            Gizmos.DrawWireSphere(v, 0.2f);
+    //        }
 
-            List<Vector3> close = CloseBehindPlayerSpawnPosition();
+    //        List<Vector3> close = CloseBehindPlayerSpawnPosition();
 
-            foreach (Vector3 v in close)
-            {
-                Gizmos.color = new Color(0, 1, 0, 1);
-                Gizmos.DrawWireSphere(v, 0.2f);
-            }
-        }
-    }
+    //        foreach (Vector3 v in close)
+    //        {
+    //            Gizmos.color = new Color(0, 1, 0, 1);
+    //            Gizmos.DrawWireSphere(v, 0.2f);
+    //        }
+    //    }
+    //}
 }
