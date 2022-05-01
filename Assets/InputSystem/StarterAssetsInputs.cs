@@ -13,6 +13,7 @@ namespace StarterAssets
 		public bool jump;
 		public bool sprint;
 		public bool activating;
+		public bool activating2;
 		[Header("Movement Settings")]
 		public bool analogMovement;
 
@@ -40,6 +41,11 @@ namespace StarterAssets
         {
 			ActivateInput(value.isPressed);
         }
+
+		public void OnActivate2(InputValue value)
+		{
+			Activate2Input(value.isPressed);
+		}
 
 		public void OnJump(InputValue value)
 		{
@@ -69,6 +75,11 @@ namespace StarterAssets
         {
 			activating = clicked;
         }
+
+		public void Activate2Input(bool clicked)
+		{
+			activating2 = clicked;
+		}
 
 		public void JumpInput(bool newJumpState)
 		{
