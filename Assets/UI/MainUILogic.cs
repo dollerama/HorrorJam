@@ -53,8 +53,9 @@ public class MainUILogic : MonoBehaviour
     void Update()
     {
         _document.rootVisualElement.Q<Label>("Pickup").visible = (_player.CanPickUp) ? true : false;
+        _document.rootVisualElement.Q<Label>("Pickup").text = _player.PickUpAction;
 
-        if(_player.TriggerMenu())
+        if (_player.TriggerMenu())
         {
             UnityEngine.Cursor.lockState = CursorLockMode.None;
             _document.rootVisualElement.Q<VisualElement>("Inventory").visible = true;

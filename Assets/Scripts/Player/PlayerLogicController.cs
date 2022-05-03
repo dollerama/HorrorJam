@@ -12,6 +12,7 @@ public class PlayerLogicController : MonoBehaviour
     private float _flashActivateCooldown = 0.25f;
     private Animator _animator;
     public bool CanPickUp;
+    public string PickUpAction;
 
     private List<string> ItemsHeld;
 
@@ -22,6 +23,7 @@ public class PlayerLogicController : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        ItemsHeld = new List<string>();
         _animator = this.GetComponentInChildren<Animator>();
         _flashlightOn = true;
         _flashActivateCooldown = 0.25f;
@@ -38,14 +40,38 @@ public class PlayerLogicController : MonoBehaviour
 
     private void CheckForPickup()
     {
+        CanPickUp = false;
         RaycastHit hit;
-        if (Physics.Raycast(new Ray(this.transform.position, this.transform.forward), out hit, 5))
+        if (Physics.Raycast(new Ray(this.transform.position, this.transform.forward), out hit, 1.5f))
         {
-            CanPickUp = (hit.collider.CompareTag("Pickup")) ? true : false;
+            
+            if (hit.collider.CompareTag("Pickup"))
+            {
+                CanPickUp = true;
+                PickUpAction = "LMB to Collect";
+            }
+            else if (hit.collider.CompareTag("LockedDoor"))
+            {
+                CanPickUp = true;
+                if (hit.collider.GetComponent<DoorController>())
+                {
+                    DoorController behaviour = hit.collider.GetComponent<DoorController>();
+                    PickUpAction = (behaviour.TryUnlock(ItemsHeld)) ? "LMB to Unlock" : "Door Locked";
+                }
+            }
+
             if (CanPickUp && _input.activating2)
             {
-                PickupBehaviour behaviour = hit.collider.GetComponent<PickupBehaviour>();
-                behaviour.TriggerPickup();
+                if (hit.collider.GetComponent<PickupBehaviour>())
+                {
+                    PickupBehaviour behaviour = hit.collider.GetComponent<PickupBehaviour>();
+                    behaviour.TriggerPickup();
+                }
+                else if(hit.collider.GetComponent<DoorController>())
+                {
+                    DoorController behaviour = hit.collider.GetComponent<DoorController>();
+                    behaviour.Unlock(ItemsHeld);
+                }
             }
         }
     }
