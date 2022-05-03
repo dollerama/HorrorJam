@@ -70,7 +70,8 @@ public class PlayerLogicController : MonoBehaviour
                 else if(hit.collider.GetComponent<DoorController>())
                 {
                     DoorController behaviour = hit.collider.GetComponent<DoorController>();
-                    behaviour.Unlock(ItemsHeld);
+                    MainUILogic mUI = GameObject.FindGameObjectWithTag("MainUI").GetComponent<MainUILogic>();
+                    mUI.RemoveItem( behaviour.Unlock(ItemsHeld) );
                 }
             }
         }

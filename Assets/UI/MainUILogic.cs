@@ -10,6 +10,7 @@ public class MainUILogic : MonoBehaviour
     private UIDocument _document;
     public VisualTreeAsset SlotTemplate;
 
+    private StyleBackground _defaultSB;
     private List<TemplateContainer> _slots;
 
     // Start is called before the first frame update
@@ -32,11 +33,12 @@ public class MainUILogic : MonoBehaviour
             _slots.Add(temp);
             rootV.Add(temp);
         }
+
+        _defaultSB = _slots[0].Q<VisualElement>("Icon").style.backgroundImage;
     }
 
     public void AddItem(string Name, Sprite Spr)
     {
-
         for (int i = 0; i < 9; i++)
         {
             if (_slots[i].Q<Label>("Name").text == "")
@@ -44,6 +46,20 @@ public class MainUILogic : MonoBehaviour
                 _slots[i].Q<Label>("Name").text = Name;
                 _slots[i].Q<VisualElement>("Icon").style.backgroundImage = new StyleBackground(Spr);
                 _player.AddItem(Name);
+                break;
+            }
+        }
+    }
+
+    public void RemoveItem(string Name)
+    { 
+        for (int i = 0; i < 9; i++)
+        {
+            if (_slots[i].Q<Label>("Name").text == Name)
+            {
+                _slots[i].Q<Label>("Name").text = "";
+                _slots[i].Q<VisualElement>("Icon").style.backgroundImage = _defaultSB;
+                _player.RemoveItem(Name);
                 break;
             }
         }
