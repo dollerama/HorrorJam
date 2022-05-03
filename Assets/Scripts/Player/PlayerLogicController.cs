@@ -12,6 +12,13 @@ public class PlayerLogicController : MonoBehaviour
     private float _flashActivateCooldown = 0.25f;
     private Animator _animator;
     public bool CanPickUp;
+
+    private List<string> ItemsHeld;
+
+    public void AddItem(string NameID) => ItemsHeld.Add(NameID);
+    public void RemoveItem(string NameID) => ItemsHeld.Remove(NameID);
+    public bool HasItem(string NameID) => ItemsHeld.Contains(NameID);
+
     // Start is called before the first frame update
     void Awake()
     {

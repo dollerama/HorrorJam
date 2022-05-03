@@ -43,6 +43,7 @@ public class MainUILogic : MonoBehaviour
             {
                 _slots[i].Q<Label>("Name").text = Name;
                 _slots[i].Q<VisualElement>("Icon").style.backgroundImage = new StyleBackground(Spr);
+                _player.AddItem(Name);
                 break;
             }
         }
