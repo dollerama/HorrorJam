@@ -6,6 +6,8 @@ TagManager:
   tags:
   - CinemachineTarget
   - Flashlight
+  - Pickup
+  - MainUI
   layers:
   - Default
   - TransparentFX

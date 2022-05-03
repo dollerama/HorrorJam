@@ -24,6 +24,11 @@ public class PlayerLogicController : MonoBehaviour
         _flashlight = GameObject.FindGameObjectWithTag("Flashlight");
     }
 
+    public bool TriggerMenu()
+    {
+        return _input.menu;
+    }
+
     private void CheckForPickup()
     {
         RaycastHit hit;
