@@ -9,6 +9,7 @@ TagManager:
   - Pickup
   - MainUI
   - LockedDoor
+  - Interactable
   layers:
   - Default
   - TransparentFX

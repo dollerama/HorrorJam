@@ -16,6 +16,8 @@ public class PlayerLogicController : MonoBehaviour
 
     private List<string> ItemsHeld;
 
+    public List<string> GetItemsHeld() => ItemsHeld;
+
     public void AddItem(string NameID) => ItemsHeld.Add(NameID);
     public void RemoveItem(string NameID) => ItemsHeld.Remove(NameID);
     public bool HasItem(string NameID) => ItemsHeld.Contains(NameID);
@@ -44,34 +46,15 @@ public class PlayerLogicController : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(new Ray(this.transform.position, this.transform.forward), out hit, 1.5f))
         {
-            
-            if (hit.collider.CompareTag("Pickup"))
+            if(hit.collider.CompareTag("Interactable"))
             {
+                Interactable i = hit.collider.GetComponent<Interactable>();
                 CanPickUp = true;
-                PickUpAction = "LMB to Collect";
-            }
-            else if (hit.collider.CompareTag("LockedDoor"))
-            {
-                CanPickUp = true;
-                if (hit.collider.GetComponent<DoorController>())
+                i.TriggerLook();
+                PickUpAction = i.GetActionText();
+                if (_input.activating2)
                 {
-                    DoorController behaviour = hit.collider.GetComponent<DoorController>();
-                    PickUpAction = (behaviour.TryUnlock(ItemsHeld)) ? "LMB to Unlock" : "Door Locked";
-                }
-            }
-
-            if (CanPickUp && _input.activating2)
-            {
-                if (hit.collider.GetComponent<PickupBehaviour>())
-                {
-                    PickupBehaviour behaviour = hit.collider.GetComponent<PickupBehaviour>();
-                    behaviour.TriggerPickup();
-                }
-                else if(hit.collider.GetComponent<DoorController>())
-                {
-                    DoorController behaviour = hit.collider.GetComponent<DoorController>();
-                    MainUILogic mUI = GameObject.FindGameObjectWithTag("MainUI").GetComponent<MainUILogic>();
-                    mUI.RemoveItem( behaviour.Unlock(ItemsHeld) );
+                    i.Trigger();
                 }
             }
         }
