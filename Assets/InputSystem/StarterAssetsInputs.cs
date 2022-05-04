@@ -15,6 +15,7 @@ namespace StarterAssets
 		public bool activating;
 		public bool activating2;
 		public bool menu;
+		public bool crouched;
 		[Header("Movement Settings")]
 		public bool analogMovement;
 
@@ -58,6 +59,11 @@ namespace StarterAssets
 			JumpInput(value.isPressed);
 		}
 
+		public void OnCrouch(InputValue value)
+		{
+			CrouchInput(value.isPressed);
+		}
+
 		public void OnSprint(InputValue value)
 		{
 			SprintInput(value.isPressed);
@@ -95,6 +101,11 @@ namespace StarterAssets
 		public void JumpInput(bool newJumpState)
 		{
 			jump = newJumpState;
+		}
+
+		public void CrouchInput(bool newCrouchState)
+		{
+			crouched = newCrouchState;
 		}
 
 		public void SprintInput(bool newSprintState)

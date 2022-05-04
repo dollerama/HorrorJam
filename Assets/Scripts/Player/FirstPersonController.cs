@@ -70,7 +70,8 @@ namespace StarterAssets
 		private GameObject _mainCamera;
 
 		private const float _threshold = 0.01f;
-		
+		private float _height;
+
 		private bool IsCurrentDeviceMouse => _playerInput.currentControlScheme == "KeyboardMouse";
 
 		private void Awake()
@@ -87,7 +88,7 @@ namespace StarterAssets
 			_controller = GetComponent<CharacterController>();
 			_input = GetComponent<StarterAssetsInputs>();
 			_playerInput = GetComponent<PlayerInput>();
-
+			_height = _controller.height;
 			// reset our timeouts on start
 			_jumpTimeoutDelta = JumpTimeout;
 			_fallTimeoutDelta = FallTimeout;
@@ -97,6 +98,7 @@ namespace StarterAssets
 		{
 			JumpAndGravity();
 			GroundedCheck();
+			CrouchCheck();
 			Move();
 		}
 
@@ -185,6 +187,20 @@ namespace StarterAssets
 
 			// move the player
 			_controller.Move(inputDirection.normalized * (_speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
+		}
+
+		private void CrouchCheck()
+        {
+			if(_input.crouched)
+            {
+				_controller.height = Mathf.Lerp(_controller.height, _height/6, Time.deltaTime*4);
+			}
+			else if(!_input.crouched && !CielingCheck())
+            {
+				_controller.height = Mathf.Lerp(_controller.height, _height, Time.deltaTime*10);
+            }
+			this.GetComponentInChildren<CapsuleCollider>().height = _controller.height;
+
 		}
 
 		private void JumpAndGravity()
