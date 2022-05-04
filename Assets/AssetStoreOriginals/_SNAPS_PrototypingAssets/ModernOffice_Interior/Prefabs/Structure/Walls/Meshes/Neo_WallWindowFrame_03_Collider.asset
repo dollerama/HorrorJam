@@ -7,7 +7,7 @@ Mesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Neo_WallWindowFrame_03_Collider
-  serializedVersion: 9
+  serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
     firstByte: 0
@@ -27,6 +27,9 @@ Mesh:
   m_BindPose: []
   m_BoneNameHashes: 
   m_RootBoneNameHash: 0
+  m_BonesAABB: []
+  m_VariableBoneCountWeights:
+    m_Data: 
   m_MeshCompression: 0
   m_IsReadable: 1
   m_KeepVertices: 1
@@ -34,7 +37,7 @@ Mesh:
   m_IndexFormat: 0
   m_IndexBuffer: 000001000200010003000200040005000600050007000600080009000a000a0009000b000c000d000e000e000d000f00100011001200130010001200140015001600140017001500180019001a001b0018001a00190008000a001a0019000a000e000f001c001c000f001d001c001d001e001d001f001e00200021002200230020002200240025002600270024002600280029002a0029002b002a00290014002b00140016002b002c002d002e002c002e002f00300031002d0030002d002c00320033003400340033003500360032003700370032003400380039003a003a0039003b003a003b003c003c003b003d003e003f0040003f00410040004200430044004200450043004600470048004600480049004a004b0047004a00470046004c004d004e004d004f004e004e004f0050004f0051005000520053005400550052005400550054005600570055005600580059005a0058005b0059003a0051004f003a003c005100370047004b003700340047005c005d005e005c005f005d00
   m_VertexData:
-    serializedVersion: 2
+    serializedVersion: 3
     m_VertexCount: 96
     m_Channels:
     - stream: 0
@@ -155,8 +158,9 @@ Mesh:
   m_BakedTriangleCollisionMesh: 
   m_MeshMetrics[0]: 1
   m_MeshMetrics[1]: 1
-  m_MeshOptimized: 0
+  m_MeshOptimizationFlags: -1
   m_StreamData:
+    serializedVersion: 2
     offset: 0
     size: 0
     path: 
