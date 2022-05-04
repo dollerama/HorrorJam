@@ -15,7 +15,9 @@ public class PlayerLogicController : MonoBehaviour
     public string PickUpAction;
 
     private List<string> ItemsHeld;
-
+    private float _checkForPickupTimer = 0;
+    private float _checkForPickupTimerMax = 0.35f;
+    private float _checkForPickupTimerMin = 0.1f;
     public List<string> GetItemsHeld() => ItemsHeld;
 
     public void AddItem(string NameID) => ItemsHeld.Add(NameID);
@@ -46,7 +48,7 @@ public class PlayerLogicController : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(new Ray(this.transform.position, this.transform.forward), out hit, 1.5f))
         {
-            if(hit.collider.CompareTag("Interactable"))
+            if (hit.collider.CompareTag("Interactable"))
             {
                 Interactable i = hit.collider.GetComponent<Interactable>();
                 CanPickUp = true;
@@ -72,6 +74,16 @@ public class PlayerLogicController : MonoBehaviour
             _animator.SetTrigger("Switch");
         }
 
-        CheckForPickup();
+        _checkForPickupTimer -= Time.deltaTime;
+        if (_checkForPickupTimer < 0 && CanPickUp)
+        {
+            CheckForPickup();
+            _checkForPickupTimer = _checkForPickupTimerMin;
+        }
+        else if (_checkForPickupTimer < 0 && !CanPickUp)
+        {
+            CheckForPickup();
+            _checkForPickupTimer = _checkForPickupTimerMax;
+        }
     }
 }
