@@ -42,6 +42,8 @@ public class PlayerLogicController : MonoBehaviour
         return _input.menu;
     }
 
+    public bool FlashlightOn() => _flashlightOn;
+
     private void CheckForPickup()
     {
         CanPickUp = false;

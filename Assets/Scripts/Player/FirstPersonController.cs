@@ -145,8 +145,9 @@ namespace StarterAssets
 		private void Move()
 		{
 			// set target speed based on move speed, sprint speed and if sprint is pressed
-			float targetSpeed = _input.sprint ? SprintSpeed : MoveSpeed;
-
+			float targetSpeed = 0;
+			targetSpeed = _input.sprint ? SprintSpeed : MoveSpeed;
+			targetSpeed = _input.crouched ? MoveSpeed / 3 : targetSpeed;
 			// a simplistic acceleration and deceleration designed to be easy to remove, replace, or iterate upon
 
 			// note: Vector2's == operator uses approximation so is not floating point error prone, and is cheaper than magnitude
@@ -217,7 +218,7 @@ namespace StarterAssets
 				}
 
 				// Jump
-				if (_input.jump && !CielingCheck() && _jumpTimeoutDelta <= 0.0f)
+				if ((_input.jump && !_input.crouched) && !CielingCheck() && _jumpTimeoutDelta <= 0.0f)
 				{
 					// the square root of H * -2 * G = how much velocity needed to reach desired height
 					_verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
