@@ -5197,7 +5197,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1084928358811745973, guid: 807c00e5d7653984daaeb9eeffe1f8a9, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 807c00e5d7653984daaeb9eeffe1f8a9, type: 3}
 --- !u!1 &2114283753834967212
 GameObject:
@@ -5498,6 +5499,14 @@ PrefabInstance:
     - target: {fileID: 2955653467173838420, guid: a4a15ea1937262d4981fa5da71f14bcd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2955653467173838421, guid: a4a15ea1937262d4981fa5da71f14bcd, type: 3}
+      propertyPath: Name
+      value: Keycard
+      objectReference: {fileID: 0}
+    - target: {fileID: 2955653467173838421, guid: a4a15ea1937262d4981fa5da71f14bcd, type: 3}
+      propertyPath: Details
+      value: Red keycard. Normal in every way.
       objectReference: {fileID: 0}
     - target: {fileID: 2955653467173838426, guid: a4a15ea1937262d4981fa5da71f14bcd, type: 3}
       propertyPath: m_Name

@@ -5098,7 +5098,6 @@ GameObject:
   - component: {fileID: 2955653467173838423}
   - component: {fileID: 2955653467173838422}
   - component: {fileID: 1666965580}
-  - component: {fileID: 8646887581574010469}
   m_Layer: 0
   m_Name: PickupTemplate
   m_TagString: Untagged
@@ -10053,26 +10052,6 @@ ParticleSystemRenderer:
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
 --- !u!114 &1666965580
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2955653467173838426}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba2cf72ba99f71147842d363555cd024, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  InteractAction:
-    m_PersistentCalls:
-      m_Calls: []
-  LookAction:
-    m_PersistentCalls:
-      m_Calls: []
-  ActionText: LMB to Collect
-  AltActionText: 
---- !u!114 &8646887581574010469
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

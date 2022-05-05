@@ -51,3 +51,6 @@ Label {
     background-image: url('/Assets/Environment/Art/Textures/Grid_01_BaseMap.png');
     margin-top: 13px;
 }
+
+.unity-text-element {
+}

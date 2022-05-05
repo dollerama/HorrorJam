@@ -14,24 +14,25 @@ public class PickupBehaviour : MonoBehaviour
     private Interactable _interactable;
 
     public string Name;
+    public string Details;
     public PickupType _type;
     public Sprite Img;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         if(_type == PickupType.Key)
         {
             _pickup = new KeyPickup(this.gameObject, this.GetComponentInChildren<MeshRenderer>().gameObject, this.GetComponentInChildren<PickupVFXcontroller>().gameObject);
         }
         _interactable = this.GetComponent<Interactable>();
-        _interactable.AddAction(() => TriggerPickup() );
+        _interactable.AddAction(TriggerPickup);
     }
 
     public void TriggerPickup()
     {
         MainUILogic mUI = GameObject.FindGameObjectWithTag("MainUI").GetComponent<MainUILogic>();
-        mUI.AddItem(Name, Img);
+        mUI.AddItem(Name, Details, Img);
         _pickup.Grab();
     }
 }

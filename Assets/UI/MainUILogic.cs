@@ -19,10 +19,17 @@ public class MainUILogic : MonoBehaviour
         _slots = new List<TemplateContainer>();
         _player = Camera.main.GetComponent<PlayerLogicController>();
         _document = this.GetComponent<UIDocument>();
-        _document.rootVisualElement.Q<Button>("BackBtn").clicked += () =>
+        _document.rootVisualElement.Q<Button>("InventoryBackBtn").clicked += () =>
         {
             _document.rootVisualElement.Q<VisualElement>("Inventory").visible = false;
+            _document.rootVisualElement.Q<VisualElement>("Reticule").visible = true;
             UnityEngine.Cursor.lockState = CursorLockMode.Locked;
+        };
+
+        _document.rootVisualElement.Q<Button>("DescriptionBackBtn").clicked += () =>
+        {
+            _document.rootVisualElement.Q<VisualElement>("Inventory").visible = true;
+            _document.rootVisualElement.Q<VisualElement>("Description").visible = false;
         };
 
         VisualElement rootV = _document.rootVisualElement.Q<VisualElement>("Inventory");
@@ -37,7 +44,7 @@ public class MainUILogic : MonoBehaviour
         _defaultSB = _slots[0].Q<VisualElement>("Icon").style.backgroundImage;
     }
 
-    public void AddItem(string Name, Sprite Spr)
+    public void AddItem(string Name, string Details, Sprite Spr)
     {
         for (int i = 0; i < 9; i++)
         {
@@ -46,6 +53,15 @@ public class MainUILogic : MonoBehaviour
                 _slots[i].Q<Label>("Name").text = Name;
                 _slots[i].Q<VisualElement>("Icon").style.backgroundImage = new StyleBackground(Spr);
                 _player.AddItem(Name);
+
+                _slots[i].Q<Button>("Details").clicked += () =>
+                {
+                    _document.rootVisualElement.Q<VisualElement>("Inventory").visible = false;
+                    _document.rootVisualElement.Q<VisualElement>("Description").visible = true;
+                    _document.rootVisualElement.Q<VisualElement>("Description").Q<Label>("Title").text = Name;
+                    _document.rootVisualElement.Q<VisualElement>("Description").Q<Label>("Content").text = Details;
+                };
+
                 break;
             }
         }
@@ -75,6 +91,7 @@ public class MainUILogic : MonoBehaviour
         {
             UnityEngine.Cursor.lockState = CursorLockMode.None;
             _document.rootVisualElement.Q<VisualElement>("Inventory").visible = true;
+            _document.rootVisualElement.Q<VisualElement>("Reticule").visible = false;
         }
     }
 }

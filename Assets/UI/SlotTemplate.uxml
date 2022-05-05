@@ -1,7 +1,9 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
     <Style src="MainUI.uss" />
-    <ui:VisualElement name="Slot" style="background-color: rgba(0, 0, 0, 0.59); text-shadow: 0 0 0 rgb(0, 0, 0); width: 150px; height: 150px; border-top-left-radius: 4px; border-bottom-left-radius: 4px; border-top-right-radius: 4px; border-bottom-right-radius: 4px; align-items: center; justify-content: space-between; margin-left: 25px; margin-right: 25px; margin-top: 25px; margin-bottom: 25px;">
-        <ui:VisualElement name="Icon" class="Icon" />
-        <ui:Label text="Label" display-tooltip-when-elided="true" name="Name" />
+    <ui:VisualElement name="Slot" style="background-color: rgba(0, 0, 0, 0.28); text-shadow: 0 0 0 rgb(0, 0, 0); width: 200px; height: 200px; border-top-left-radius: -61px; border-bottom-left-radius: -61px; border-top-right-radius: -61px; border-bottom-right-radius: -61px; align-items: center; justify-content: space-around; margin-left: 10px; margin-right: 10px; margin-top: 10px; margin-bottom: 10px; border-left-color: rgba(255, 255, 255, 0); border-right-color: rgba(255, 255, 255, 0); border-top-color: rgba(255, 255, 255, 0.3); border-bottom-color: rgba(255, 255, 255, 0.2); border-left-width: 2px; border-right-width: 2px; border-top-width: 2px; border-bottom-width: 2px;">
+        <ui:Label text="Label" display-tooltip-when-elided="true" name="Name" style="color: rgb(255, 255, 255); font-size: 18px; padding-bottom: 7px; -unity-font-style: normal;" />
+        <ui:VisualElement name="IconBG" class="Icon" style="background-image: url(&apos;/Assets/UI/Visuals/SlotFrame.png&apos;); background-color: rgba(0, 0, 0, 0); position: absolute; -unity-background-image-tint-color: rgb(255, 255, 255);" />
+        <ui:VisualElement name="Icon" class="Icon" style="background-image: none; background-color: rgba(0, 0, 0, 0); margin-top: -1px; height: 54%; top: -12px; bottom: 172px; width: 57%; flex-basis: 53%;" />
+        <ui:Button text="Details" display-tooltip-when-elided="true" name="Details" style="flex-basis: 9%; flex-shrink: 1;" />
     </ui:VisualElement>
 </ui:UXML>
