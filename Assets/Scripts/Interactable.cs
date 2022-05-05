@@ -9,7 +9,7 @@ public class Interactable : MonoBehaviour
     public UnityEvent LookAction;
     public string ActionText;
     public string AltActionText;
-    public bool ActionTextMode;
+    private bool ActionTextMode;
 
     // Start is called before the first frame update
     void Awake()
@@ -23,6 +23,8 @@ public class Interactable : MonoBehaviour
         return (ActionTextMode) ? AltActionText : ActionText;
     }
 
+    public bool SetActionTextMode(bool b) => ActionTextMode = b;
+
     public void AddAction(UnityAction _action)
     {
         InteractAction.AddListener(_action);
@@ -35,11 +37,11 @@ public class Interactable : MonoBehaviour
 
     public void Trigger()
     {
-        InteractAction.Invoke();
+        InteractAction?.Invoke();
     }
 
     public void TriggerLook()
     {
-        LookAction.Invoke();
+        LookAction?.Invoke();
     }
 }

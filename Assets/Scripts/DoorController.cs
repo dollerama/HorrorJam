@@ -8,13 +8,15 @@ public class DoorController : MonoBehaviour
     public Mesh UnlockedMesh;
     public string UnlockID;
     private Interactable _interactable;
+    private bool _locked;
 
     private void Start()
     {
+        _locked = true;
         _player = Camera.main.GetComponent<PlayerLogicController>();
         _interactable = this.GetComponent<Interactable>();
         _interactable.AddAction( () => TriggerAction() );
-        _interactable.AddLook( () => { _interactable.ActionTextMode = (TryUnlock(_player.GetItemsHeld())); });
+        _interactable.AddLook( () => { _interactable.SetActionTextMode( TryUnlock( _player.GetItemsHeld() ) ); });
     }
 
     private void TriggerAction()
@@ -25,11 +27,12 @@ public class DoorController : MonoBehaviour
 
     public string Unlock(List<string> items)
     {
-        if (!items.Contains(UnlockID)) return "";
+        if (!items.Contains(UnlockID) || !_locked) return "";
         this.GetComponent<MeshFilter>().mesh = UnlockedMesh;
         this.GetComponent<MeshCollider>().sharedMesh = UnlockedMesh;
+        _locked = false;
         return UnlockID;
     }
 
-    public bool TryUnlock(List<string> items) => items.Contains(UnlockID);
+    public bool TryUnlock(List<string> items) => items.Contains(UnlockID) && _locked;
 }

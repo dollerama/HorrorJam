@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 1538355209528496430}
   - component: {fileID: 1516946934693549963}
   - component: {fileID: 1516946934693549972}
-  m_Layer: 0
+  - component: {fileID: 1084928358811745973}
+  m_Layer: 3
   m_Name: LockedDoor
   m_TagString: LockedDoor
   m_Icon: {fileID: 0}
@@ -115,3 +116,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UnlockedMesh: {fileID: 4300000, guid: 565084c6683627f49b758e030151154f, type: 2}
   UnlockID: Badge
+--- !u!114 &1084928358811745973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1515624622302402390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba2cf72ba99f71147842d363555cd024, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InteractAction:
+    m_PersistentCalls:
+      m_Calls: []
+  LookAction:
+    m_PersistentCalls:
+      m_Calls: []
+  ActionText: Door is locked
+  AltActionText: LMB to use Badge
+  ActionTextMode: 0

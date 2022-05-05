@@ -16,7 +16,10 @@ public class Ghost : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _thisMat.SetFloat("_Alpha", _Alpha);
-        _Alpha = Mathf.Lerp(_Alpha, 0, Time.deltaTime);
+        if (_thisMat)
+        {
+            _thisMat.SetFloat("_Alpha", _Alpha);
+            _Alpha = Mathf.Lerp(_Alpha, 0, Time.deltaTime);
+        }
     }
 }
