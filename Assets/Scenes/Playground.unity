@@ -5500,14 +5500,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2955653467173838421, guid: a4a15ea1937262d4981fa5da71f14bcd, type: 3}
-      propertyPath: Name
-      value: Keycard
-      objectReference: {fileID: 0}
-    - target: {fileID: 2955653467173838421, guid: a4a15ea1937262d4981fa5da71f14bcd, type: 3}
-      propertyPath: Details
-      value: Red keycard. Normal in every way.
-      objectReference: {fileID: 0}
     - target: {fileID: 2955653467173838426, guid: a4a15ea1937262d4981fa5da71f14bcd, type: 3}
       propertyPath: m_Name
       value: Pickup
