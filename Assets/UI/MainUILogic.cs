@@ -12,11 +12,13 @@ public class MainUILogic : MonoBehaviour
 
     private StyleBackground _defaultSB;
     private List<TemplateContainer> _slots;
+    private List<System.Action> _slotsData;
 
     // Start is called before the first frame update
     void Start()
     {
         _slots = new List<TemplateContainer>();
+        _slotsData = new List<System.Action>();
         _player = Camera.main.GetComponent<PlayerLogicController>();
         _document = this.GetComponent<UIDocument>();
         _document.rootVisualElement.Q<Button>("InventoryBackBtn").clicked += () =>
@@ -38,6 +40,7 @@ public class MainUILogic : MonoBehaviour
             TemplateContainer temp = SlotTemplate.Instantiate();
             temp.Q<Label>("Name").text = "";
             _slots.Add(temp);
+            _slotsData.Add(()=> { });
             rootV.Add(temp);
         }
 
@@ -53,14 +56,15 @@ public class MainUILogic : MonoBehaviour
                 _slots[i].Q<Label>("Name").text = Name;
                 _slots[i].Q<VisualElement>("Icon").style.backgroundImage = new StyleBackground(Spr);
                 _player.AddItem(Name);
-
-                _slots[i].Q<Button>("Details").clicked += () =>
+                _slotsData[i] = () =>
                 {
                     _document.rootVisualElement.Q<VisualElement>("Inventory").visible = false;
                     _document.rootVisualElement.Q<VisualElement>("Description").visible = true;
                     _document.rootVisualElement.Q<VisualElement>("Description").Q<Label>("Title").text = Name;
                     _document.rootVisualElement.Q<VisualElement>("Description").Q<Label>("Content").text = Details;
                 };
+
+                _slots[i].Q<Button>("Details").clicked += _slotsData[i];
 
                 break;
             }
@@ -75,6 +79,8 @@ public class MainUILogic : MonoBehaviour
             {
                 _slots[i].Q<Label>("Name").text = "";
                 _slots[i].Q<VisualElement>("Icon").style.backgroundImage = _defaultSB;
+                _slots[i].Q<Button>("Details").clicked -= _slotsData[i];
+
                 _player.RemoveItem(Name);
                 break;
             }
