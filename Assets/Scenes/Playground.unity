@@ -589,7 +589,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &228671685
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5285,7 +5285,7 @@ CharacterController:
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 43.76, z: 0}
+  m_Center: {x: 0, y: 45.1, z: 0}
 --- !u!114 &919132149401938807
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5311,7 +5311,7 @@ CapsuleCollider:
   m_Radius: 16.1
   m_Height: 88.3
   m_Direction: 1
-  m_Center: {x: 0, y: 43.76, z: 0}
+  m_Center: {x: 0, y: 45.2, z: 0}
 --- !u!4 &1131993812124563963
 Transform:
   m_ObjectHideFlags: 0
@@ -5712,7 +5712,7 @@ Light:
   m_BounceIntensity: 0
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: NaN, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 4.34e-43, y: -0.0000000011487131, z: 4.33e-43, w: 8e-44}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -6294,7 +6294,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a9483f931435a774fbdd493d47560b93, type: 2}
+  - {fileID: 2100000, guid: eea4a50e0fb89154d81628597086a3a0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

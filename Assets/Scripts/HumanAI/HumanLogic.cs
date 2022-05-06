@@ -20,7 +20,7 @@ public class HumanLogic : MonoBehaviour
         _timer -= Time.deltaTime;
         if (_timer > 0)
         {
-            _controller.Move(transform.forward * 0.75f * Time.deltaTime);
+            _controller.Move(transform.forward * 0.7f * Time.deltaTime);
             _animator.SetFloat("Movement", 0.2f);
         }
         else
