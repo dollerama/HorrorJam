@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using StarterAssets;
 
 public class PlayerLogicController : MonoBehaviour
@@ -56,7 +57,7 @@ public class PlayerLogicController : MonoBehaviour
                 CanPickUp = true;
                 i.TriggerLook();
                 PickUpAction = i.GetActionText();
-                if (_input.activating2)
+                if (Mouse.current.leftButton.isPressed)
                 {
                     i.Trigger();
                 }
@@ -68,7 +69,7 @@ public class PlayerLogicController : MonoBehaviour
     void Update()
     {
         _flashActivateCooldown -= Time.deltaTime;
-        if(_input.activating && _flashActivateCooldown < 0)
+        if(Mouse.current.rightButton.isPressed && _flashActivateCooldown < 0)
         {
             _flashActivateCooldown = 0.25f;
             _flashlight.GetComponentInChildren<Light>().enabled = !_flashlight.GetComponentInChildren<Light>().enabled;
