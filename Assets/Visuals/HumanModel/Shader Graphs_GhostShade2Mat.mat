@@ -41,9 +41,9 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     m_Colors:
-    - Color_140b37ab6df24922a691649ccf0c19c7: {r: 0, g: 0, b: 0, a: 1}
-    - Color_22091d059a0c4afe9c7e1984d57e243f: {r: 0.2641509, g: 0.2641509, b: 0.2641509, a: 1}
-    - Color_6ca3465427d14172a728df5e9c413b47: {r: 128, g: 34.415092, b: 39.24108, a: 1}
+    - Color_140b37ab6df24922a691649ccf0c19c7: {r: 0, g: 0.93673205, b: 1, a: 1}
+    - Color_22091d059a0c4afe9c7e1984d57e243f: {r: 1, g: 0, b: 0.10410547, a: 1}
+    - Color_6ca3465427d14172a728df5e9c413b47: {r: 0, g: 78.79325, b: 26.925238, a: 1}
     - Color_8b0961182e0a4140a8c6607596dc91e2: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &228560519665757038

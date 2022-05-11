@@ -195,7 +195,7 @@ namespace StarterAssets
         {
 			if(_input.crouched)
             {
-				_controller.height = Mathf.Lerp(_controller.height, _height/6, Time.deltaTime*4);
+				_controller.height = Mathf.Lerp(_controller.height, _height/10, Time.deltaTime*4);
 			}
 			else if(!_input.crouched && !CielingCheck())
             {

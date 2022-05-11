@@ -1291,6 +1291,9 @@ MonoBehaviour:
   LookAction:
     m_PersistentCalls:
       m_Calls: []
+  VisibilityAction:
+    m_PersistentCalls:
+      m_Calls: []
   ActionText: Capture @
   AltActionText: Place
 --- !u!4 &442973799
@@ -6328,6 +6331,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   LookAction:
+    m_PersistentCalls:
+      m_Calls: []
+  VisibilityAction:
     m_PersistentCalls:
       m_Calls: []
   ActionText: I am Ball
@@ -13263,6 +13269,9 @@ MonoBehaviour:
   LookAction:
     m_PersistentCalls:
       m_Calls: []
+  VisibilityAction:
+    m_PersistentCalls:
+      m_Calls: []
   ActionText: Capture @
   AltActionText: Place @
 --- !u!4 &1409118710
@@ -15001,6 +15010,9 @@ MonoBehaviour:
   LookAction:
     m_PersistentCalls:
       m_Calls: []
+  VisibilityAction:
+    m_PersistentCalls:
+      m_Calls: []
   ActionText: Door is locked
   AltActionText: LMB to use @
 --- !u!4 &4710701638026977 stripped
@@ -16383,7 +16395,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: eea4a50e0fb89154d81628597086a3a0, type: 2}
+  - {fileID: 2100000, guid: a9483f931435a774fbdd493d47560b93, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

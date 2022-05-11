@@ -17,6 +17,7 @@ public class DoorController : MonoBehaviour
         _interactable = this.GetComponent<Interactable>();
         _interactable.AddAction( () => TriggerAction() );
         _interactable.AddLook( () => { _interactable.SetActionTextMode( TryUnlock( _player.HoldingItem(UnlockID) ) ); });
+        _interactable.AddVisibility( () => { _interactable.SetVisible(_locked); });
         _interactable.FormatWithKeyWord(UnlockID);
     }
 

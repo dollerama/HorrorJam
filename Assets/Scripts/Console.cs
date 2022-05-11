@@ -64,7 +64,7 @@ public class Console : MonoBehaviour
             _mat.SetTexture("_Icon", null);
             _uiLogic.AddItem(Detail);
         }
-        else if(_uiLogic.GetHoldingDetail().Name != "")
+        else if(!_hasSymbol && _uiLogic.GetHoldingDetail().Name != "")
         {
             SetDetail(_uiLogic.GetHoldingDetail());
 
