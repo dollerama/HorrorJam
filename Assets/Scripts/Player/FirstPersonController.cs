@@ -68,6 +68,7 @@ namespace StarterAssets
 		private CharacterController _controller;
 		private StarterAssetsInputs _input;
 		private GameObject _mainCamera;
+		private MainUILogic _uiLogic;
 
 		private const float _threshold = 0.01f;
 		private float _height;

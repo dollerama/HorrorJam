@@ -48,9 +48,30 @@ Label {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
     align-items: auto;
-    background-image: url('/Assets/Environment/Art/Textures/Grid_01_BaseMap.png');
+    background-image: url('project://database/Assets/Environment/Art/Textures/Grid_01_BaseMap.png?fileID=2800000&guid=d1118dda59970a2449ee890fa247c4c5&type=3#Grid_01_BaseMap');
     margin-top: 13px;
 }
 
 .unity-text-element {
+}
+
+.InventoryBackBtn {
+    position: absolute;
+    top: 102%;
+    width: 32%;
+    height: 9%;
+    font-size: 28px;
+    left: 514px;
+    flex-shrink: 1;
+    flex-grow: 1;
+    border-left-color: rgb(255, 239, 239);
+    border-right-color: rgb(255, 239, 239);
+    border-top-color: rgb(255, 239, 239);
+    border-bottom-color: rgb(255, 239, 239);
+    background-color: rgba(0, 0, 0, 0.44);
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 12px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 12px;
+    color: rgba(255, 255, 255, 0.64);
 }

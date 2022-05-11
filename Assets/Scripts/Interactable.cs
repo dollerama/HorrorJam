@@ -18,6 +18,12 @@ public class Interactable : MonoBehaviour
         this.tag = "Interactable";
     }
 
+    public void FormatWithKeyWord(string word)
+    {
+        ActionText = ActionText.Replace("@", word);
+        AltActionText = AltActionText.Replace("@", word);
+    }
+
     public string GetActionText()
     {
         return (ActionTextMode) ? AltActionText : ActionText;

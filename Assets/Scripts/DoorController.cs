@@ -16,23 +16,27 @@ public class DoorController : MonoBehaviour
         _player = Camera.main.GetComponent<PlayerLogicController>();
         _interactable = this.GetComponent<Interactable>();
         _interactable.AddAction( () => TriggerAction() );
-        _interactable.AddLook( () => { _interactable.SetActionTextMode( TryUnlock( _player.GetItemsHeld() ) ); });
+        _interactable.AddLook( () => { _interactable.SetActionTextMode( TryUnlock( _player.HoldingItem(UnlockID) ) ); });
+        _interactable.FormatWithKeyWord(UnlockID);
     }
 
     private void TriggerAction()
     {
-        MainUILogic mUI = GameObject.FindGameObjectWithTag("MainUI").GetComponent<MainUILogic>();
-        mUI.RemoveItem( Unlock(_player.GetItemsHeld()) );
+        if (_player.HoldingItem(UnlockID))
+        {
+            MainUILogic mUI = GameObject.FindGameObjectWithTag("MainUI").GetComponent<MainUILogic>();
+            mUI.RemoveItem(Unlock(_player.HoldingItem(UnlockID)));
+        }
     }
 
-    public string Unlock(List<string> items)
+    public string Unlock(bool k)
     {
-        if (!items.Contains(UnlockID) || !_locked) return "";
+        if (!k || !_locked) return "";
         this.GetComponent<MeshFilter>().mesh = UnlockedMesh;
         this.GetComponent<MeshCollider>().sharedMesh = UnlockedMesh;
         _locked = false;
         return UnlockID;
     }
 
-    public bool TryUnlock(List<string> items) => items.Contains(UnlockID) && _locked;
+    public bool TryUnlock(bool item) => item && _locked;
 }

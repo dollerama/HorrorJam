@@ -7,6 +7,7 @@ using StarterAssets;
 public class PlayerLogicController : MonoBehaviour
 {
     private GameObject _player;
+    private MainUILogic _uiLogic;
     private GameObject _flashlight;
     private StarterAssetsInputs _input;
     private bool _flashlightOn;
@@ -21,9 +22,18 @@ public class PlayerLogicController : MonoBehaviour
     private float _checkForPickupTimerMin = 0.1f;
     public List<string> GetItemsHeld() => ItemsHeld;
 
-    public void AddItem(string NameID) => ItemsHeld.Add(NameID);
-    public void RemoveItem(string NameID) => ItemsHeld.Remove(NameID);
+    public void AddItem(string NameID)
+    {
+        ItemsHeld.Add(NameID);
+    }
+
+    public void RemoveItem(string NameID)
+    {
+        ItemsHeld.Remove(NameID);
+    }
     public bool HasItem(string NameID) => ItemsHeld.Contains(NameID);
+
+    public bool HoldingItem(string NameID) => NameID == _uiLogic.GetHoldingID();
 
     // Start is called before the first frame update
     void Awake()
@@ -36,6 +46,8 @@ public class PlayerLogicController : MonoBehaviour
         _player = GameObject.FindGameObjectWithTag("Player");
         _input = _player.GetComponent<StarterAssetsInputs>();
         _flashlight = GameObject.FindGameObjectWithTag("Flashlight");
+
+        _uiLogic = GameObject.FindGameObjectWithTag("MainUI").GetComponent<MainUILogic>();
     }
 
     public bool TriggerMenu()
