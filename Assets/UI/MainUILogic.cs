@@ -89,6 +89,13 @@ public class MainUILogic : MonoBehaviour
                         CornerSlot.Q<VisualElement>("Icon").style.backgroundImage = new StyleBackground(detail.Img);
                         CornerSlot.Q<Label>("Name").text = detail.Name;
                         _slots[i].Q<Button>("Hold").style.opacity = 0f;
+                        for (int k = 0; k < 9; k++)
+                        {
+                            if(k != i)
+                            {
+                                _slots[k].Q<Button>("Hold").style.opacity = 1f;
+                            }
+                        }
                         HoldID = detail;
                     }
                 };
