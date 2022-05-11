@@ -123,6 +123,7 @@ public class MainUILogic : MonoBehaviour
                 if (HoldID.Name == CornerSlot.Q<Label>("Name").text)
                 {
                     HoldID = new PickupDetail();
+                    HoldID.Name = "";
                 }
 
                 CornerSlot.Q<VisualElement>("Icon").style.backgroundImage = null;
