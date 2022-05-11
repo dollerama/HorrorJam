@@ -15,6 +15,7 @@ public class Console : MonoBehaviour
     public Texture2D Symbol;
     public string SymbolID;
     private float _timer;
+    private ParticleSystem _particles;
 
     // Start is called before the first frame update
     void Start()
@@ -22,14 +23,30 @@ public class Console : MonoBehaviour
         _timer = 0;
         _uiLogic = GameObject.FindGameObjectWithTag("MainUI").GetComponent<MainUILogic>();
         _hasSymbol = true;
-        _mat = this.GetComponentInChildren<Renderer>().material;
+        Renderer[] _mats = this.GetComponentsInChildren<Renderer>();
+        foreach(Renderer _r in _mats)
+        {
+            if(_r.transform.parent != transform.parent)
+            {
+                _mat = _r.material;
+            }
+        }
+
         _player = Camera.main.GetComponent<PlayerLogicController>();
+        _particles = GetComponent<ParticleSystem>();
+
         _mat.SetTexture("_Icon", Symbol);
         _mat.SetColor("_Emissive", Emissive);
 
         _interactable = this.GetComponent<Interactable>();
+        _interactable.FormatWithKeyWord(SymbolID);
+
         _interactable.AddAction(Action);
-        _interactable.AddLook(() => { _interactable.SetActionTextMode(_hasSymbol); });
+        _interactable.AddLook(() => { _interactable.SetActionTextMode(!_hasSymbol); });
+        _interactable.AddVisibility(() => 
+        {
+            _interactable.SetVisible((_uiLogic.GetHoldingDetail().Name != "" && !_hasSymbol) || _hasSymbol);
+        });
 
         Detail.Img = Sprite.Create(Symbol, new Rect(Vector2.zero, new Vector2(Symbol.width, Symbol.height)), Vector2.zero);
     }
@@ -54,6 +71,8 @@ public class Console : MonoBehaviour
             _hasSymbol = true;
             _mat.SetTexture("_Icon", Detail.Img.texture);
             _uiLogic.RemoveItem(Detail.Name);
+
+            _particles.Play();
         }
     }
 
