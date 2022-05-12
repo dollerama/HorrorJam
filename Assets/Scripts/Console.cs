@@ -9,6 +9,7 @@ public class Console : MonoBehaviour
     public Color Emissive;
     private Interactable _interactable;
     private bool _hasSymbol;
+    [SerializeField] Renderer renderer;
     private Material _mat;
     private PlayerLogicController _player;
     private MainUILogic _uiLogic;
@@ -17,33 +18,29 @@ public class Console : MonoBehaviour
     private float _timer;
     private ParticleSystem _particles;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        _timer = 0;
         _uiLogic = GameObject.FindGameObjectWithTag("MainUI").GetComponent<MainUILogic>();
-        _hasSymbol = true;
-        Renderer[] _mats = this.GetComponentsInChildren<Renderer>();
-        foreach(Renderer _r in _mats)
-        {
-            if(_r.transform.parent != transform.parent)
-            {
-                _mat = _r.material;
-            }
-        }
-
         _player = Camera.main.GetComponent<PlayerLogicController>();
         _particles = GetComponent<ParticleSystem>();
+        _interactable = this.GetComponent<Interactable>();
+    }
 
+    void Start()
+    {
+        _mat = renderer.material;
         _mat.SetTexture("_Icon", Symbol);
+
+        _timer = 0;
+        _hasSymbol = true;
+
         _mat.SetColor("_Emissive", Emissive);
 
-        _interactable = this.GetComponent<Interactable>();
         _interactable.FormatWithKeyWord(SymbolID);
 
         _interactable.AddAction(Action);
         _interactable.AddLook(() => { _interactable.SetActionTextMode(!_hasSymbol); });
-        _interactable.AddVisibility(() => 
+        _interactable.AddVisibility(() =>
         {
             _interactable.SetVisible((_uiLogic.GetHoldingDetail().Name != "" && !_hasSymbol) || _hasSymbol);
         });

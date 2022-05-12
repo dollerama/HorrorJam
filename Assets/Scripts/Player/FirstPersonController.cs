@@ -69,9 +69,13 @@ namespace StarterAssets
 		private StarterAssetsInputs _input;
 		private GameObject _mainCamera;
 		private MainUILogic _uiLogic;
+		private PlayerAudioController _footsteps;
 
 		private const float _threshold = 0.01f;
 		private float _height;
+		private string groundTag;
+
+		public string GetGroundTag() => groundTag;
 
 		private bool IsCurrentDeviceMouse => _playerInput.currentControlScheme == "KeyboardMouse";
 
@@ -82,13 +86,16 @@ namespace StarterAssets
 			{
 				_mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
 			}
+
+			_controller = GetComponent<CharacterController>();
+			_input = GetComponent<StarterAssetsInputs>();
+			_playerInput = GetComponent<PlayerInput>();
+			_footsteps = GetComponent<PlayerAudioController>();
 		}
 
 		private void Start()
 		{
-			_controller = GetComponent<CharacterController>();
-			_input = GetComponent<StarterAssetsInputs>();
-			_playerInput = GetComponent<PlayerInput>();
+			
 			_height = _controller.height;
 			// reset our timeouts on start
 			_jumpTimeoutDelta = JumpTimeout;
@@ -113,6 +120,18 @@ namespace StarterAssets
 			// set sphere position, with offset
 			Vector3 spherePosition = new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z);
 			Grounded = Physics.CheckSphere(spherePosition, GroundedRadius, GroundLayers, QueryTriggerInteraction.Ignore);
+
+			if(Grounded)
+            {
+				Collider[] colliders;
+				colliders = Physics.OverlapSphere(spherePosition, GroundedRadius, GroundLayers, QueryTriggerInteraction.Ignore);
+				
+				foreach(Collider c in colliders)
+                {
+					groundTag = c.tag;
+					break;
+                }
+            }
 		}
 		private bool CielingCheck()
 		{
