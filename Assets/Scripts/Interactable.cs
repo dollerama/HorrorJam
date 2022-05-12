@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.Events;
 
 public class Interactable : MonoBehaviour
@@ -10,6 +11,12 @@ public class Interactable : MonoBehaviour
     public UnityEvent VisibilityAction;
     public string ActionText;
     public string AltActionText;
+
+    public AudioClip ActionSfx;
+    public AudioClip AltActionSfx;
+    private AudioSource Source;
+    public AudioMixerGroup Group;
+
     private bool ActionTextMode;
     private bool visible;
     private string _keyword;
@@ -20,6 +27,9 @@ public class Interactable : MonoBehaviour
         ActionTextMode = false;
         this.tag = "Interactable";
         _keyword = "Object";
+        Source = gameObject.AddComponent<AudioSource>();
+        Source.playOnAwake = false;
+        Source.outputAudioMixerGroup = Group;
     }
     public void FormatWithKeyWord(string word) => _keyword = word;
 
@@ -49,6 +59,12 @@ public class Interactable : MonoBehaviour
 
     public void Trigger()
     {
+        if (ActionTextMode)
+            Source.clip = ActionSfx;
+        else
+            Source.clip = AltActionSfx;
+
+        Source.Play();
         InteractAction?.Invoke();
     }
 
