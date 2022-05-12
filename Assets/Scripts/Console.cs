@@ -69,9 +69,10 @@ public class Console : MonoBehaviour
             SetDetail(_uiLogic.GetHoldingDetail());
 
             _hasSymbol = true;
+            SymbolID = Detail.Name;
             _mat.SetTexture("_Icon", Detail.Img.texture);
             _uiLogic.RemoveItem(Detail.Name);
-
+            _interactable.FormatWithKeyWord(SymbolID);
             _particles.Play();
         }
     }

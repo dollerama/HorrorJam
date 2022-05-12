@@ -12,23 +12,20 @@ public class Interactable : MonoBehaviour
     public string AltActionText;
     private bool ActionTextMode;
     private bool visible;
-
+    private string _keyword;
     // Start is called before the first frame update
     void Awake()
     {
         visible = true;
         ActionTextMode = false;
         this.tag = "Interactable";
+        _keyword = "Object";
     }
-    public void FormatWithKeyWord(string word)
-    {
-        ActionText = ActionText.Replace("@", word);
-        AltActionText = AltActionText.Replace("@", word);
-    }
+    public void FormatWithKeyWord(string word) => _keyword = word;
 
     public string GetActionText()
     {
-        string text = (ActionTextMode) ? AltActionText : ActionText;
+        string text = (ActionTextMode) ? AltActionText.Replace("@", _keyword) : ActionText.Replace("@", _keyword);
         return (visible) ? text : "";
     }
 
