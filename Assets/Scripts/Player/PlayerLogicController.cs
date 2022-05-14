@@ -2,103 +2,108 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using StarterAssets;
 
-public class PlayerLogicController : MonoBehaviour
+namespace Player
 {
-    private GameObject _player;
-    private MainUILogic _uiLogic;
-    private GameObject _flashlight;
-    private StarterAssetsInputs _input;
-    private bool _flashlightOn;
-    private float _flashActivateCooldown = 0.25f;
-    private Animator _animator;
-    public bool CanPickUp;
-    public string PickUpAction;
-
-    private List<string> ItemsHeld;
-    private float _checkForPickupTimer = 0;
-    private float _checkForPickupTimerMax = 0.35f;
-    private float _checkForPickupTimerMin = 0.1f;
-    public List<string> GetItemsHeld() => ItemsHeld;
-
-    public void AddItem(string NameID)
+    public class PlayerLogicController : MonoBehaviour
     {
-        ItemsHeld.Add(NameID);
-    }
+        private GameObject _player;
+        private MainUILogic _uiLogic;
+        private GameObject _flashlight;
+        private StarterAssetsInputs _input;
+        private bool _flashlightOn;
+        private float _flashActivateCooldown = 0.25f;
+        private Animator _animator;
+        public bool CanPickUp;
+        public string PickUpAction;
 
-    public void RemoveItem(string NameID)
-    {
-        ItemsHeld.Remove(NameID);
-    }
-    public bool HasItem(string NameID) => ItemsHeld.Contains(NameID);
+        private List<string> ItemsHeld;
+        private float _checkForPickupTimer = 0;
+        private float _checkForPickupTimerMax = 0.35f;
+        private float _checkForPickupTimerMin = 0.1f;
+        public List<string> GetItemsHeld() => ItemsHeld;
 
-    public bool HoldingItem(string NameID) => NameID == _uiLogic.GetHoldingID();
-
-    // Start is called before the first frame update
-    void Awake()
-    {
-        ItemsHeld = new List<string>();
-        _animator = this.GetComponentInChildren<Animator>();
-        _flashlightOn = true;
-        _flashActivateCooldown = 0.25f;
-
-        _player = GameObject.FindGameObjectWithTag("Player");
-        _input = _player.GetComponent<StarterAssetsInputs>();
-        _flashlight = GameObject.FindGameObjectWithTag("Flashlight");
-
-        _uiLogic = GameObject.FindGameObjectWithTag("MainUI").GetComponent<MainUILogic>();
-    }
-
-    public bool TriggerMenu()
-    {
-        return _input.menu;
-    }
-
-    public bool FlashlightOn() => _flashlightOn;
-
-    private void CheckForPickup()
-    {
-        CanPickUp = false;
-        RaycastHit hit;
-        if (Physics.Raycast(new Ray(this.transform.position, this.transform.forward), out hit, 1.5f))
+        public void AddItem(string NameID)
         {
-            if (hit.collider.CompareTag("Interactable"))
+            ItemsHeld.Add(NameID);
+        }
+
+        public void RemoveItem(string NameID)
+        {
+            ItemsHeld.Remove(NameID);
+        }
+        public bool HasItem(string NameID) => ItemsHeld.Contains(NameID);
+
+        public bool HoldingItem(string NameID) => NameID == MainUILogic.Instance.GetHoldingID();
+
+        // Start is called before the first frame update
+        void Awake()
+        {
+            ItemsHeld = new List<string>();
+            _animator = this.GetComponentInChildren<Animator>();
+            _flashlightOn = true;
+            _flashActivateCooldown = 0.25f;
+
+            _player = GameObject.FindGameObjectWithTag("Player");
+            _input = _player.GetComponent<StarterAssetsInputs>();
+            _flashlight = GameObject.FindGameObjectWithTag("Flashlight");
+        }
+
+        public bool TriggerMenu()
+        {
+            return _input.menu;
+        }
+
+        public bool FlashlightOn() => _flashlightOn;
+
+        private void CheckForPickup()
+        {
+            CanPickUp = false;
+            RaycastHit hit;
+            if (Physics.Raycast(new Ray(this.transform.position, this.transform.forward), out hit, 1.5f))
             {
-                Interactable i = hit.collider.GetComponent<Interactable>();
-                CanPickUp = true;
-                i.TriggerLook();
-                PickUpAction = i.GetActionText();
-                if (Mouse.current.leftButton.isPressed)
+                if (hit.collider.CompareTag("Interactable"))
                 {
-                    i.Trigger();
+                    Interactable i = hit.collider.GetComponent<Interactable>();
+                    CanPickUp = true;
+                    i.TriggerLook();
+                    PickUpAction = i.GetActionText();
+                    if (Mouse.current.leftButton.isPressed)
+                    {
+                        i.Trigger();
+                    }
                 }
             }
         }
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        _flashActivateCooldown -= Time.deltaTime;
-        if(Mouse.current.rightButton.isPressed && _flashActivateCooldown < 0)
+        // Update is called once per frame
+        void Update()
         {
-            _flashActivateCooldown = 0.25f;
-            _flashlight.GetComponentInChildren<Light>().enabled = !_flashlight.GetComponentInChildren<Light>().enabled;
-            _animator.SetBool("Activated", _flashlight.GetComponentInChildren<Light>().enabled);
-            _animator.SetTrigger("Switch");
-        }
+            bool inMenu = MainUILogic.Instance.IsInMenu();
 
-        _checkForPickupTimer -= Time.deltaTime;
-        if (_checkForPickupTimer < 0 && CanPickUp)
-        {
-            CheckForPickup();
-            _checkForPickupTimer = _checkForPickupTimerMin;
-        }
-        else if (_checkForPickupTimer < 0 && !CanPickUp)
-        {
-            CheckForPickup();
-            _checkForPickupTimer = _checkForPickupTimerMax;
+            _flashActivateCooldown -= Time.deltaTime;
+            if (Mouse.current.rightButton.isPressed && _flashActivateCooldown < 0 && !inMenu)
+            {
+                _flashActivateCooldown = 0.25f;
+                _flashlight.GetComponentInChildren<Light>().enabled = !_flashlight.GetComponentInChildren<Light>().enabled;
+                _animator.SetBool("Activated", _flashlight.GetComponentInChildren<Light>().enabled);
+                _animator.SetTrigger("Switch");
+            }
+
+            _checkForPickupTimer -= Time.deltaTime;
+
+            if (inMenu) return;
+
+            if (_checkForPickupTimer < 0 && CanPickUp)
+            {
+                CheckForPickup();
+                _checkForPickupTimer = _checkForPickupTimerMin;
+            }
+            else if (_checkForPickupTimer < 0 && !CanPickUp)
+            {
+                CheckForPickup();
+                _checkForPickupTimer = _checkForPickupTimerMax;
+            }
         }
     }
 }

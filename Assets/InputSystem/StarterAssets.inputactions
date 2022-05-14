@@ -72,7 +72,7 @@
                     "name": "Menu",
                     "type": "PassThrough",
                     "id": "28a1c8fb-bf05-4b97-a783-8a45f293530b",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -283,7 +283,7 @@
                     "path": "<Keyboard>/enter",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "KeyboardMouse",
                     "action": "Menu",
                     "isComposite": false,
                     "isPartOfComposite": false

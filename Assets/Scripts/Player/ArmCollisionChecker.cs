@@ -10,13 +10,13 @@ public class ArmCollisionChecker : MonoBehaviour
     private Ray _caster;
     private Vector3 _offset;
     private Vector3 _ogPosition;
-    private PlayerLogicController _pLC;
+    private Player.PlayerLogicController _pLC;
 
     // Start is called before the first frame update
     void Awake()
     {
         _ogPosition = transform.localPosition;
-        _pLC = this.transform.parent.GetComponent<PlayerLogicController>();
+        _pLC = this.transform.parent.GetComponent<Player.PlayerLogicController>();
         _caster = new Ray(transform.parent.position - (transform.parent.forward / 10), transform.parent.forward);
     }
 

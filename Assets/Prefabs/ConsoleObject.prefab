@@ -179,7 +179,7 @@ MonoBehaviour:
     Type: 0
     Img: {fileID: 0}
   Emissive: {r: 9.082411, g: 0, b: 1.6643162, a: 1}
-  renderer: {fileID: 4372097713894941974}
+  _renderer: {fileID: 4372097713894941974}
   Symbol: {fileID: 2800000, guid: 74d87964daf8aef49ace6008fff0d6a8, type: 3}
   SymbolID: Symbol1
 --- !u!135 &3129256363055073280

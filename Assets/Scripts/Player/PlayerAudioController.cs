@@ -1,80 +1,85 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using StarterAssets;
 
-public class PlayerAudioController : MonoBehaviour
+namespace Player
 {
-    
-    public AudioSource[] FootstepAudio;
-    public FootstepPack[] stepPacks;
-    public float threshold;
-    public float rate;
-    public float intensity;
-
-    private StarterAssetsInputs _input;
-    private FirstPersonController _controller;
-    private string currentTag;
-    private int tagIndex;
-    private bool footAB;
-    private float walkDelta;
-    private int footIndex;
-    private float walkDeltaTimer;
-    
-
-    private Vector3 prevPos;
-    // Start is called before the first frame update
-    void Awake()
+    public class PlayerAudioController : MonoBehaviour
     {
-        FootstepAudio = GetComponents<AudioSource>();
-        _input = GetComponent<StarterAssetsInputs>();
-        _controller = GetComponent<FirstPersonController>();
-    }
+        public FootstepPack[] stepPacks;
+        public float threshold;
+        public float rate;
+        public float intensity;
+        public AudioClip[] Clips;
+        public float ClipVolume;
 
-    private void Start()
-    {
-        currentTag = "default";
-        footAB = false;
-        prevPos = gameObject.transform.position;
-        footIndex = 0;
-    }
+        private StarterAssetsInputs _input;
+        private FirstPersonController _controller;
+        private string currentTag;
+        private int tagIndex;
+        private bool footAB;
+        private float walkDelta;
+        private int footIndex;
+        private float walkDeltaTimer;
 
-    // Update is called once per frame
-    void Update()
-    {
-        if(currentTag != _controller.GetGroundTag())
+
+        private Vector3 prevPos;
+        // Start is called before the first frame update
+        void Awake()
         {
-            for(int i=0; i < stepPacks.Length; i++)
-            {
-                if(stepPacks[i].tag == currentTag)
-                {
-                    tagIndex = i;
-                    break;
-                }
-            }
-
-            currentTag = _controller.GetGroundTag();
+            _input = GetComponent<StarterAssetsInputs>();
+            _controller = GetComponent<FirstPersonController>();
         }
 
-        if(_input.move.magnitude > threshold)
+        private void Start()
         {
-            walkDelta = (gameObject.transform.position - prevPos).magnitude;
+            currentTag = "default";
+            footAB = false;
             prevPos = gameObject.transform.position;
-            Debug.Log(walkDelta);
-            walkDeltaTimer += Time.deltaTime * (walkDelta*intensity);
-        }
-        else
-        {
             footIndex = 0;
         }
 
-        int roundedDelta = Mathf.RoundToInt(walkDelta);
-        if (walkDeltaTimer > rate)
+        void CheckGroundTag()
         {
-            walkDeltaTimer = 0;
-            float volume = (footIndex % 2 == 0) ? Random.Range(0.075f, 0.3f) : Random.Range(0.05f, 0.15f);
-            AudioSource.PlayClipAtPoint(stepPacks[tagIndex].clips[footIndex % 5], transform.position + Vector3.down * 0.5f, volume);
-            footIndex++;
+            if (currentTag != _controller.GetGroundTag())
+            {
+                for (int i = 0; i < stepPacks.Length; i++)
+                {
+                    if (stepPacks[i].tag == currentTag)
+                    {
+                        tagIndex = i;
+                        break;
+                    }
+                }
+
+                currentTag = _controller.GetGroundTag();
+            }
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+            CheckGroundTag();
+
+            if (_input.move.magnitude > threshold)
+            {
+                walkDelta = (gameObject.transform.position - prevPos).magnitude;
+                prevPos = gameObject.transform.position;
+                walkDeltaTimer += Time.deltaTime * (walkDelta * intensity);
+            }
+            else
+            {
+                footIndex = 0;
+            }
+
+            int roundedDelta = Mathf.RoundToInt(walkDelta);
+            if (walkDeltaTimer > rate)
+            {
+                walkDeltaTimer = 0;
+                float volume = (footIndex % 2 == 0) ? Random.Range(0.075f, 0.3f) : Random.Range(0.05f, 0.15f);
+                AudioSource.PlayClipAtPoint(stepPacks[tagIndex].clips[footIndex % 5], transform.position + Vector3.down * 0.5f, volume);
+                footIndex++;
+            }
         }
     }
 }

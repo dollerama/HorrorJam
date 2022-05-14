@@ -9,10 +9,9 @@ public class Console : MonoBehaviour
     public Color Emissive;
     private Interactable _interactable;
     private bool _hasSymbol;
-    [SerializeField] Renderer renderer;
+    [SerializeField] Renderer _renderer;
     private Material _mat;
-    private PlayerLogicController _player;
-    private MainUILogic _uiLogic;
+    private Player.PlayerLogicController _player;
     public Texture2D Symbol;
     public string SymbolID;
     private float _timer;
@@ -20,15 +19,14 @@ public class Console : MonoBehaviour
 
     private void Awake()
     {
-        _uiLogic = GameObject.FindGameObjectWithTag("MainUI").GetComponent<MainUILogic>();
-        _player = Camera.main.GetComponent<PlayerLogicController>();
+        _player = Camera.main.GetComponent<Player.PlayerLogicController>();
         _particles = GetComponent<ParticleSystem>();
         _interactable = this.GetComponent<Interactable>();
     }
 
     void Start()
     {
-        _mat = renderer.material;
+        _mat = _renderer.material;
         _mat.SetTexture("_Icon", Symbol);
 
         _timer = 0;
@@ -42,7 +40,8 @@ public class Console : MonoBehaviour
         _interactable.AddLook(() => { _interactable.SetActionTextMode(!_hasSymbol); });
         _interactable.AddVisibility(() =>
         {
-            _interactable.SetVisible((_uiLogic.GetHoldingDetail().Name != "" && !_hasSymbol) || _hasSymbol);
+            _interactable.SetVisible(
+                (Player.MainUILogic.Instance.GetHoldingDetail().Name != "" && !_hasSymbol) || _hasSymbol);
         });
 
         Detail.Img = Sprite.Create(Symbol, new Rect(Vector2.zero, new Vector2(Symbol.width, Symbol.height)), Vector2.zero);
@@ -59,16 +58,16 @@ public class Console : MonoBehaviour
         {
             _hasSymbol = false;
             _mat.SetTexture("_Icon", null);
-            _uiLogic.AddItem(Detail);
+            Player.MainUILogic.Instance.AddItem(Detail);
         }
-        else if(!_hasSymbol && _uiLogic.GetHoldingDetail().Name != "")
+        else if(!_hasSymbol && Player.MainUILogic.Instance.GetHoldingDetail().Name != "")
         {
-            SetDetail(_uiLogic.GetHoldingDetail());
+            SetDetail(Player.MainUILogic.Instance.GetHoldingDetail());
 
             _hasSymbol = true;
             SymbolID = Detail.Name;
             _mat.SetTexture("_Icon", Detail.Img.texture);
-            _uiLogic.RemoveItem(Detail.Name);
+            Player.MainUILogic.Instance.RemoveItem(Detail.Name);
             _interactable.FormatWithKeyWord(SymbolID);
             _particles.Play();
         }

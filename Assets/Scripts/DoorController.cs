@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DoorController : MonoBehaviour
 {
-    private PlayerLogicController _player;
+    private Player.PlayerLogicController _player;
     public Mesh UnlockedMesh;
     public string UnlockID;
     private Interactable _interactable;
@@ -13,10 +13,10 @@ public class DoorController : MonoBehaviour
     private void Start()
     {
         _locked = true;
-        _player = Camera.main.GetComponent<PlayerLogicController>();
+        _player = Camera.main.GetComponent<Player.PlayerLogicController>();
         _interactable = this.GetComponent<Interactable>();
         _interactable.AddAction( () => TriggerAction() );
-        _interactable.AddLook( () => { _interactable.SetActionTextMode( TryUnlock( _player.HoldingItem(UnlockID) ) ); });
+        _interactable.AddLook( () => { _interactable.SetActionTextMode(TryUnlock(_player.HoldingItem(UnlockID))); });
         _interactable.AddVisibility( () => { _interactable.SetVisible(_locked); });
         _interactable.FormatWithKeyWord(UnlockID);
     }
@@ -25,8 +25,7 @@ public class DoorController : MonoBehaviour
     {
         if (_player.HoldingItem(UnlockID))
         {
-            MainUILogic mUI = GameObject.FindGameObjectWithTag("MainUI").GetComponent<MainUILogic>();
-            mUI.RemoveItem(Unlock(_player.HoldingItem(UnlockID)));
+            Player.MainUILogic.Instance.RemoveItem(Unlock(_player.HoldingItem(UnlockID)));
         }
     }
 

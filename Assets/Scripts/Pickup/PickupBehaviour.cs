@@ -37,7 +37,11 @@ public class PickupBehaviour : MonoBehaviour
     {
         if(Detail.Type == PickupType.Key)
         {
-            _pickup = new KeyPickup(this.gameObject, this.GetComponentInChildren<MeshRenderer>().gameObject, this.GetComponentInChildren<PickupVFXcontroller>().gameObject);
+            _pickup = new KeyPickup(
+                gameObject, 
+                GetComponentInChildren<MeshRenderer>().gameObject, 
+                GetComponentInChildren<PickupVFXcontroller>().gameObject
+            );
         }
         _interactable = this.GetComponent<Interactable>();
         _interactable.AddAction(TriggerPickup);
@@ -46,8 +50,7 @@ public class PickupBehaviour : MonoBehaviour
 
     public void TriggerPickup()
     {
-        MainUILogic mUI = GameObject.FindGameObjectWithTag("MainUI").GetComponent<MainUILogic>();
-        mUI.AddItem(Detail);
+        Player.MainUILogic.Instance.AddItem(Detail);
         _pickup.Grab();
     }
 }
