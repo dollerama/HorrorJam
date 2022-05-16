@@ -2,12 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Console : MonoBehaviour
+public class Console : Interactable
 {
     public PickupDetail Detail;
     [ColorUsage(true, true)]
     public Color Emissive;
-    private Interactable _interactable;
     private bool _hasSymbol;
     [SerializeField] Renderer _renderer;
     private Material _mat;
@@ -17,11 +16,18 @@ public class Console : MonoBehaviour
     private float _timer;
     private ParticleSystem _particles;
 
+
+
     private void Awake()
     {
+        Init();
         _player = Camera.main.GetComponent<Player.PlayerLogicController>();
         _particles = GetComponent<ParticleSystem>();
-        _interactable = this.GetComponent<Interactable>();
+    }
+
+    public override void Init()
+    {
+        base.Init();
     }
 
     void Start()
@@ -34,14 +40,13 @@ public class Console : MonoBehaviour
 
         _mat.SetColor("_Emissive", Emissive);
 
-        _interactable.FormatWithKeyWord(SymbolID);
+        FormatWithKeyWord(SymbolID);
 
-        _interactable.AddAction(Action);
-        _interactable.AddLook(() => { _interactable.SetActionTextMode(!_hasSymbol); });
-        _interactable.AddVisibility(() =>
+        AddAction(Action);
+        AddLook(() => { SetActionTextMode(!_hasSymbol); });
+        AddVisibility(() =>
         {
-            _interactable.SetVisible(
-                (Player.MainUILogic.Instance.GetHoldingDetail().Name != "" && !_hasSymbol) || _hasSymbol);
+            SetVisible((Player.MainUILogic.Instance.GetHoldingDetail().Name != "" && !_hasSymbol) || _hasSymbol);
         });
 
         Detail.Img = Sprite.Create(Symbol, new Rect(Vector2.zero, new Vector2(Symbol.width, Symbol.height)), Vector2.zero);
@@ -68,7 +73,7 @@ public class Console : MonoBehaviour
             SymbolID = Detail.Name;
             _mat.SetTexture("_Icon", Detail.Img.texture);
             Player.MainUILogic.Instance.RemoveItem(Detail.Name);
-            _interactable.FormatWithKeyWord(SymbolID);
+            FormatWithKeyWord(SymbolID);
             _particles.Play();
         }
     }

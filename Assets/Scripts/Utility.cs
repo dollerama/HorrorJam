@@ -4,5 +4,5 @@ using UnityEngine;
 
 static public class Utility
 {
-    static public bool IsLookingAtObject(Vector3 dir1, Vector3 dir2) => (Vector3.Dot(dir1, dir2) < 0) ? false : true;
+    static public bool IsLookingAtObject(Vector3 dir, Vector3 obj1, Vector3 obj2) => (Vector3.Dot(dir, (obj2-obj1).normalized) < 0) ? false : true;
 }

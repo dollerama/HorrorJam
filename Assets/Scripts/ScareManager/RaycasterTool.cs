@@ -178,7 +178,7 @@ public class RaycasterTool : MonoBehaviour
         {
             RaycastHit hit;
             Ray r = new Ray(v, (this.transform.position - v).normalized);
-            if (!Utility.IsLookingAtObject(this.transform.forward, -r.direction) &&
+            if (!Utility.IsLookingAtObject(this.transform.forward, this.transform.position, v) &&
                 (v - this.transform.position).sqrMagnitude > DistFallOff)
             {
                 retList.Add(v);
@@ -197,7 +197,7 @@ public class RaycasterTool : MonoBehaviour
         {
             RaycastHit hit;
             Ray r = new Ray(v, (this.transform.position - v).normalized);
-            if (!Utility.IsLookingAtObject(this.transform.forward, -r.direction))
+            if (!Utility.IsLookingAtObject(this.transform.forward, this.transform.position, v))
             {
                 retList.Add(v);
             }

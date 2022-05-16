@@ -2,23 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DoorController : MonoBehaviour
+public class DoorController : Interactable
 {
     private Player.PlayerLogicController _player;
     public Mesh UnlockedMesh;
     public string UnlockID;
-    private Interactable _interactable;
     private bool _locked;
 
     private void Start()
     {
+        Init();
         _locked = true;
         _player = Camera.main.GetComponent<Player.PlayerLogicController>();
-        _interactable = this.GetComponent<Interactable>();
-        _interactable.AddAction( () => TriggerAction() );
-        _interactable.AddLook( () => { _interactable.SetActionTextMode(TryUnlock(_player.HoldingItem(UnlockID))); });
-        _interactable.AddVisibility( () => { _interactable.SetVisible(_locked); });
-        _interactable.FormatWithKeyWord(UnlockID);
+        AddAction( () => TriggerAction() );
+        AddLook( () => { SetActionTextMode(TryUnlock(_player.HoldingItem(UnlockID))); });
+        AddVisibility( () => { SetVisible(_locked); });
+        FormatWithKeyWord(UnlockID);
     }
 
     private void TriggerAction()

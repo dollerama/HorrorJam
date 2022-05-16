@@ -2,25 +2,35 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KeyPickup : PickupI
+public class KeyPickup : PickupBehaviour, PickupI
 {
-    public GameObject Obj;
-    public GameObject ObjMesh;
-    public GameObject VFX;
+    private GameObject Obj;
+    private GameObject ObjMesh;
+    private GameObject VFX;
 
-    public void Grab()
+    public void Awake()
     {
+        Init();
+    }
+
+    public override void Grab()
+    {
+        base.Grab();
+
         Obj.GetComponent<ParticleSystem>().Play();
         Obj.GetComponent<SphereCollider>().enabled = false;
+
         GameObject.Destroy(ObjMesh);
         VFX.GetComponent<PickupVFXcontroller>().Kill();
         GameObject.Destroy(Obj, 7);
     }
 
-    public KeyPickup(GameObject PI, GameObject OM, GameObject vfx)
+    public override void Init()
     {
-        Obj = PI;
-        ObjMesh = OM;
-        VFX = vfx;
+        base.Init();
+
+        Obj = gameObject;
+        ObjMesh = GetComponentInChildren<MeshRenderer>().gameObject;
+        VFX = GetComponentInChildren<PickupVFXcontroller>().gameObject;
     }
 }

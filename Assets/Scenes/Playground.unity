@@ -1465,7 +1465,7 @@ GameObject:
   - component: {fileID: 563899329}
   - component: {fileID: 563899328}
   - component: {fileID: 563899327}
-  - component: {fileID: 563899326}
+  - component: {fileID: 563899331}
   m_Layer: 3
   m_Name: Sphere
   m_TagString: Untagged
@@ -1473,32 +1473,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &563899326
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 563899325}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba2cf72ba99f71147842d363555cd024, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  InteractAction:
-    m_PersistentCalls:
-      m_Calls: []
-  LookAction:
-    m_PersistentCalls:
-      m_Calls: []
-  VisibilityAction:
-    m_PersistentCalls:
-      m_Calls: []
-  ActionText: I am Ball
-  AltActionText: 
-  ActionSfx: {fileID: 8300000, guid: 0af427dc75974a349b6b528cb81a85ff, type: 3}
-  AltActionSfx: {fileID: 0}
-  Group: {fileID: 6032532151814797720, guid: 1b5842124246a214ebfd37dd6127949b, type: 2}
 --- !u!135 &563899327
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1577,6 +1551,44 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &563899331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 563899325}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bdfe68958c82904f88ac9d2ffa9fea9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InteractAction:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 919132147926461537}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  LookAction:
+    m_PersistentCalls:
+      m_Calls: []
+  VisibilityAction:
+    m_PersistentCalls:
+      m_Calls: []
+  ActionText: Kill Mask
+  AltActionText: 
+  ActionSfx: {fileID: 8300000, guid: 0af427dc75974a349b6b528cb81a85ff, type: 3}
+  AltActionSfx: {fileID: 8300000, guid: 0af427dc75974a349b6b528cb81a85ff, type: 3}
+  Group: {fileID: 6032532151814797720, guid: 1b5842124246a214ebfd37dd6127949b, type: 2}
 --- !u!1001 &581291986
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2009,6 +2021,41 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4381973011225120, guid: 238ac8785f3f5b947941aa4fd6e0ce86, type: 3}
   m_PrefabInstance: {fileID: 35258138}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &720584753 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2955653467173838426, guid: a4a15ea1937262d4981fa5da71f14bcd, type: 3}
+  m_PrefabInstance: {fileID: 8646887582156682793}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &720584754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 720584753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9609b5c00e0c1214d85574316a07ca64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InteractAction:
+    m_PersistentCalls:
+      m_Calls: []
+  LookAction:
+    m_PersistentCalls:
+      m_Calls: []
+  VisibilityAction:
+    m_PersistentCalls:
+      m_Calls: []
+  ActionText: Take @
+  AltActionText: 
+  ActionSfx: {fileID: 8300000, guid: 6ba39878a5540534db9f0792a4ace0dc, type: 3}
+  AltActionSfx: {fileID: 8300000, guid: 0af427dc75974a349b6b528cb81a85ff, type: 3}
+  Group: {fileID: 6032532151814797720, guid: 1b5842124246a214ebfd37dd6127949b, type: 2}
+  Detail:
+    Name: Red Keycard
+    Details: Red Keycard. Matt finish.
+    Img: {fileID: 21300000, guid: b5cac0fd263cd7547ad4c20ea27b545d, type: 3}
 --- !u!1 &737727585 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 654550372061330379, guid: 79a341f0ed938f14599ea1ecb9abac2e, type: 3}
@@ -10704,6 +10751,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Classic_WallDoor_01_snaps001
       objectReference: {fileID: 0}
+    - target: {fileID: 1516946934693549972, guid: 807c00e5d7653984daaeb9eeffe1f8a9, type: 3}
+      propertyPath: Group
+      value: 
+      objectReference: {fileID: 6032532151814797720, guid: 1b5842124246a214ebfd37dd6127949b, type: 2}
+    - target: {fileID: 1516946934693549972, guid: 807c00e5d7653984daaeb9eeffe1f8a9, type: 3}
+      propertyPath: ActionSfx
+      value: 
+      objectReference: {fileID: 8300000, guid: 0af427dc75974a349b6b528cb81a85ff, type: 3}
+    - target: {fileID: 1516946934693549972, guid: 807c00e5d7653984daaeb9eeffe1f8a9, type: 3}
+      propertyPath: ActionText
+      value: Door Locked
+      objectReference: {fileID: 0}
+    - target: {fileID: 1516946934693549972, guid: 807c00e5d7653984daaeb9eeffe1f8a9, type: 3}
+      propertyPath: AltActionSfx
+      value: 
+      objectReference: {fileID: 8300000, guid: 6ba39878a5540534db9f0792a4ace0dc, type: 3}
+    - target: {fileID: 1516946934693549972, guid: 807c00e5d7653984daaeb9eeffe1f8a9, type: 3}
+      propertyPath: AltActionText
+      value: Open Door with @
+      objectReference: {fileID: 0}
     - target: {fileID: 1521648676074490404, guid: 807c00e5d7653984daaeb9eeffe1f8a9, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -10748,7 +10815,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1640073035619220, guid: 807c00e5d7653984daaeb9eeffe1f8a9, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 807c00e5d7653984daaeb9eeffe1f8a9, type: 3}
 --- !u!1 &1736561080437838542
 GameObject:
@@ -11273,6 +11341,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3129256363055073281, guid: 4ad9a8567cf6e2643830c173719526fc, type: 3}
+      propertyPath: Group
+      value: 
+      objectReference: {fileID: 6032532151814797720, guid: 1b5842124246a214ebfd37dd6127949b, type: 2}
+    - target: {fileID: 3129256363055073281, guid: 4ad9a8567cf6e2643830c173719526fc, type: 3}
+      propertyPath: ActionSfx
+      value: 
+      objectReference: {fileID: 8300000, guid: 6ba39878a5540534db9f0792a4ace0dc, type: 3}
+    - target: {fileID: 3129256363055073281, guid: 4ad9a8567cf6e2643830c173719526fc, type: 3}
+      propertyPath: ActionText
+      value: Take @
+      objectReference: {fileID: 0}
+    - target: {fileID: 3129256363055073281, guid: 4ad9a8567cf6e2643830c173719526fc, type: 3}
+      propertyPath: AltActionSfx
+      value: 
+      objectReference: {fileID: 8300000, guid: 0af427dc75974a349b6b528cb81a85ff, type: 3}
+    - target: {fileID: 3129256363055073281, guid: 4ad9a8567cf6e2643830c173719526fc, type: 3}
+      propertyPath: AltActionText
+      value: Place Item
+      objectReference: {fileID: 0}
     - target: {fileID: 3129256363055073283, guid: 4ad9a8567cf6e2643830c173719526fc, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -11321,7 +11409,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: ConsoleObject
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3129256363055073282, guid: 4ad9a8567cf6e2643830c173719526fc, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 4ad9a8567cf6e2643830c173719526fc, type: 3}
 --- !u!4 &3317436611139334585
 Transform:
@@ -12610,7 +12699,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pickup
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2955653467173838421, guid: a4a15ea1937262d4981fa5da71f14bcd, type: 3}
+    - {fileID: 1666965580, guid: a4a15ea1937262d4981fa5da71f14bcd, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a4a15ea1937262d4981fa5da71f14bcd, type: 3}
 --- !u!4 &8879528567095288145
 Transform:

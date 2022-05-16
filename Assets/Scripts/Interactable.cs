@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.Events;
 
-public class Interactable : MonoBehaviour
+[System.Serializable]
+public abstract class Interactable : MonoBehaviour
 {
     public UnityEvent InteractAction;
     public UnityEvent LookAction;
@@ -20,17 +21,21 @@ public class Interactable : MonoBehaviour
     private bool ActionTextMode;
     private bool visible;
     private string _keyword;
+    private GameObject _instance;
     // Start is called before the first frame update
-    void Awake()
+    public virtual void Init()
     {
+        _instance = gameObject;
+
         visible = true;
         ActionTextMode = false;
-        this.tag = "Interactable";
+        _instance.tag = "Interactable";
         _keyword = "Object";
-        Source = gameObject.AddComponent<AudioSource>();
+        Source = _instance.AddComponent<AudioSource>();
         Source.playOnAwake = false;
         Source.outputAudioMixerGroup = Group;
     }
+
     public void FormatWithKeyWord(string word) => _keyword = word;
 
     public string GetActionText()
@@ -72,5 +77,10 @@ public class Interactable : MonoBehaviour
     {
         VisibilityAction?.Invoke();
         LookAction?.Invoke();
+    }
+
+    public virtual void Grab()
+    {
+
     }
 }

@@ -66,8 +66,10 @@ namespace Player
                 {
                     Interactable i = hit.collider.GetComponent<Interactable>();
                     CanPickUp = true;
+
                     i.TriggerLook();
                     PickUpAction = i.GetActionText();
+
                     if (Mouse.current.leftButton.isPressed)
                     {
                         i.Trigger();
