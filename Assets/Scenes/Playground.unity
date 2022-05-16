@@ -10751,26 +10751,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Classic_WallDoor_01_snaps001
       objectReference: {fileID: 0}
-    - target: {fileID: 1516946934693549972, guid: 807c00e5d7653984daaeb9eeffe1f8a9, type: 3}
-      propertyPath: Group
-      value: 
-      objectReference: {fileID: 6032532151814797720, guid: 1b5842124246a214ebfd37dd6127949b, type: 2}
-    - target: {fileID: 1516946934693549972, guid: 807c00e5d7653984daaeb9eeffe1f8a9, type: 3}
-      propertyPath: ActionSfx
-      value: 
-      objectReference: {fileID: 8300000, guid: 0af427dc75974a349b6b528cb81a85ff, type: 3}
-    - target: {fileID: 1516946934693549972, guid: 807c00e5d7653984daaeb9eeffe1f8a9, type: 3}
-      propertyPath: ActionText
-      value: Door Locked
-      objectReference: {fileID: 0}
-    - target: {fileID: 1516946934693549972, guid: 807c00e5d7653984daaeb9eeffe1f8a9, type: 3}
-      propertyPath: AltActionSfx
-      value: 
-      objectReference: {fileID: 8300000, guid: 6ba39878a5540534db9f0792a4ace0dc, type: 3}
-    - target: {fileID: 1516946934693549972, guid: 807c00e5d7653984daaeb9eeffe1f8a9, type: 3}
-      propertyPath: AltActionText
-      value: Open Door with @
-      objectReference: {fileID: 0}
     - target: {fileID: 1521648676074490404, guid: 807c00e5d7653984daaeb9eeffe1f8a9, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -10815,8 +10795,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1640073035619220, guid: 807c00e5d7653984daaeb9eeffe1f8a9, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 807c00e5d7653984daaeb9eeffe1f8a9, type: 3}
 --- !u!1 &1736561080437838542
 GameObject:
@@ -11341,26 +11320,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3129256363055073281, guid: 4ad9a8567cf6e2643830c173719526fc, type: 3}
-      propertyPath: Group
-      value: 
-      objectReference: {fileID: 6032532151814797720, guid: 1b5842124246a214ebfd37dd6127949b, type: 2}
-    - target: {fileID: 3129256363055073281, guid: 4ad9a8567cf6e2643830c173719526fc, type: 3}
-      propertyPath: ActionSfx
-      value: 
-      objectReference: {fileID: 8300000, guid: 6ba39878a5540534db9f0792a4ace0dc, type: 3}
-    - target: {fileID: 3129256363055073281, guid: 4ad9a8567cf6e2643830c173719526fc, type: 3}
-      propertyPath: ActionText
-      value: Take @
-      objectReference: {fileID: 0}
-    - target: {fileID: 3129256363055073281, guid: 4ad9a8567cf6e2643830c173719526fc, type: 3}
-      propertyPath: AltActionSfx
-      value: 
-      objectReference: {fileID: 8300000, guid: 0af427dc75974a349b6b528cb81a85ff, type: 3}
-    - target: {fileID: 3129256363055073281, guid: 4ad9a8567cf6e2643830c173719526fc, type: 3}
-      propertyPath: AltActionText
-      value: Place Item
-      objectReference: {fileID: 0}
     - target: {fileID: 3129256363055073283, guid: 4ad9a8567cf6e2643830c173719526fc, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -11409,8 +11368,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: ConsoleObject
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 3129256363055073282, guid: 4ad9a8567cf6e2643830c173719526fc, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4ad9a8567cf6e2643830c173719526fc, type: 3}
 --- !u!4 &3317436611139334585
 Transform:

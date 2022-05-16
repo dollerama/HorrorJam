@@ -107,7 +107,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3129256363055073283}
-  - component: {fileID: 3129256363055073282}
   - component: {fileID: 3129256363055073281}
   - component: {fileID: 3129256363055073280}
   - component: {fileID: 3129256363055073293}
@@ -135,32 +134,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3129256363055073282
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3129256363055073287}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba2cf72ba99f71147842d363555cd024, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  InteractAction:
-    m_PersistentCalls:
-      m_Calls: []
-  LookAction:
-    m_PersistentCalls:
-      m_Calls: []
-  VisibilityAction:
-    m_PersistentCalls:
-      m_Calls: []
-  ActionText: Capture @
-  AltActionText: Place
-  ActionSfx: {fileID: 8300000, guid: 0af427dc75974a349b6b528cb81a85ff, type: 3}
-  AltActionSfx: {fileID: 8300000, guid: 0af427dc75974a349b6b528cb81a85ff, type: 3}
-  Group: {fileID: 6032532151814797720, guid: 1b5842124246a214ebfd37dd6127949b, type: 2}
 --- !u!114 &3129256363055073281
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -173,10 +146,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fb7b45fcce887b49b8d95b8368e8adc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  InteractAction:
+    m_PersistentCalls:
+      m_Calls: []
+  LookAction:
+    m_PersistentCalls:
+      m_Calls: []
+  VisibilityAction:
+    m_PersistentCalls:
+      m_Calls: []
+  ActionText: Take @
+  AltActionText: Place Item
+  ActionSfx: {fileID: 8300000, guid: 6ba39878a5540534db9f0792a4ace0dc, type: 3}
+  AltActionSfx: {fileID: 8300000, guid: 0af427dc75974a349b6b528cb81a85ff, type: 3}
+  Group: {fileID: 6032532151814797720, guid: 1b5842124246a214ebfd37dd6127949b, type: 2}
   Detail:
     Name: Symbol1
     Details: A plain Symbol
-    Type: 0
     Img: {fileID: 0}
   Emissive: {r: 9.082411, g: 0, b: 1.6643162, a: 1}
   _renderer: {fileID: 4372097713894941974}

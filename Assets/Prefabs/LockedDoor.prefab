@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 1538355209528496430}
   - component: {fileID: 1516946934693549963}
   - component: {fileID: 1516946934693549972}
-  - component: {fileID: 1640073035619220}
   m_Layer: 3
   m_Name: LockedDoor
   m_TagString: LockedDoor
@@ -116,20 +115,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a48268fa21cbdaa46ad91e7d42ae6c79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UnlockedMesh: {fileID: 4300000, guid: 565084c6683627f49b758e030151154f, type: 2}
-  UnlockID: Red Keycard
---- !u!114 &1640073035619220
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1515624622302402390}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba2cf72ba99f71147842d363555cd024, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   InteractAction:
     m_PersistentCalls:
       m_Calls: []
@@ -139,8 +124,10 @@ MonoBehaviour:
   VisibilityAction:
     m_PersistentCalls:
       m_Calls: []
-  ActionText: Door is locked
-  AltActionText: LMB to use @
+  ActionText: Door Locked
+  AltActionText: Open Door with @
   ActionSfx: {fileID: 8300000, guid: 0af427dc75974a349b6b528cb81a85ff, type: 3}
   AltActionSfx: {fileID: 8300000, guid: 6ba39878a5540534db9f0792a4ace0dc, type: 3}
   Group: {fileID: 6032532151814797720, guid: 1b5842124246a214ebfd37dd6127949b, type: 2}
+  UnlockedMesh: {fileID: 4300000, guid: 565084c6683627f49b758e030151154f, type: 2}
+  UnlockID: Red Keycard

@@ -5106,10 +5106,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2955653467173838420}
   - component: {fileID: 2955653467173838427}
-  - component: {fileID: 2955653467173838421}
   - component: {fileID: 2955653467173838423}
   - component: {fileID: 2955653467173838422}
-  - component: {fileID: 1666965580}
+  - component: {fileID: 7161726430825920270}
   m_Layer: 0
   m_Name: PickupTemplate
   m_TagString: Untagged
@@ -5147,23 +5146,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.17
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2955653467173838421
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2955653467173838426}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73dd09a8edef1d44cb479bdd22b9e7f8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Detail:
-    Name: Red Keycard
-    Details: A normal keycard. Crimson finish.
-    Type: 0
-    Img: {fileID: 21300000, guid: b5cac0fd263cd7547ad4c20ea27b545d, type: 3}
 --- !u!198 &2955653467173838423
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -10073,7 +10055,7 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!114 &1666965580
+--- !u!114 &7161726430825920270
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -10082,7 +10064,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2955653467173838426}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba2cf72ba99f71147842d363555cd024, type: 3}
+  m_Script: {fileID: 11500000, guid: 9609b5c00e0c1214d85574316a07ca64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   InteractAction:
@@ -10094,11 +10076,15 @@ MonoBehaviour:
   VisibilityAction:
     m_PersistentCalls:
       m_Calls: []
-  ActionText: LMB to Collect
+  ActionText: Pick up @
   AltActionText: 
   ActionSfx: {fileID: 8300000, guid: 0af427dc75974a349b6b528cb81a85ff, type: 3}
   AltActionSfx: {fileID: 8300000, guid: 6ba39878a5540534db9f0792a4ace0dc, type: 3}
-  Group: {fileID: 6032532151814797720, guid: 1b5842124246a214ebfd37dd6127949b, type: 2}
+  Group: {fileID: 0}
+  Detail:
+    Name: Red Keycard
+    Details: Red Keycard. Matte finish.
+    Img: {fileID: 21300000, guid: b5cac0fd263cd7547ad4c20ea27b545d, type: 3}
 --- !u!1 &8275218624628187500
 GameObject:
   m_ObjectHideFlags: 0
