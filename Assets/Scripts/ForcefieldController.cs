@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class ForcefieldController : MonoBehaviour
 {
@@ -23,12 +24,14 @@ public class ForcefieldController : MonoBehaviour
             enabledVal = Mathf.Lerp(enabledVal, 0, Time.deltaTime * 2);
         else
             enabledVal = Mathf.Lerp(enabledVal, 1, Time.deltaTime * 2);
+
         _mat.SetFloat("_Enabled", enabledVal);
     }
 
     public void ToggleEnable(bool val)
     {
         GetComponent<BoxCollider>().isTrigger = !val;
+        GetComponent<NavMeshObstacle>().enabled = !val;
         enabled = val;
     }
 }

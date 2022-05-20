@@ -19,7 +19,7 @@ namespace Player
 
         private List<string> ItemsHeld;
         private float _checkForPickupTimer = 0;
-        private float _checkForPickupTimerMax = 0.35f;
+        private float _checkForPickupTimerMax = 0.15f;
         private float _checkForPickupTimerMin = 0.1f;
         public List<string> GetItemsHeld() => ItemsHeld;
 
