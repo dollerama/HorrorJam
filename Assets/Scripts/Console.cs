@@ -1,22 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Console : Interactable
 {
-    public PickupDetail Detail;
-    [ColorUsage(true, true)]
-    public Color Emissive;
     private bool _hasSymbol;
     [SerializeField] Renderer _renderer;
     private Material _mat;
     private Player.PlayerLogicController _player;
+
+    public PickupDetail Detail;
+    [ColorUsage(true, true)]
+    public Color Emissive;
     public Texture2D Symbol;
     public string SymbolID;
+    public string SymbolIDKey;
+
+    public UnityEvent onKeyAdded;
+    public UnityEvent onKeyRemoved;
+
     private float _timer;
     private ParticleSystem _particles;
-
-
 
     private void Awake()
     {
@@ -33,14 +38,21 @@ public class Console : Interactable
     void Start()
     {
         _mat = _renderer.material;
-        _mat.SetTexture("_Icon", Symbol);
-
         _timer = 0;
         _hasSymbol = true;
 
-        _mat.SetColor("_Emissive", Emissive);
+        if(SymbolID == "")
+        {
+            _hasSymbol = false;
+        }
+        else
+        {
+            _mat.SetTexture("_Icon", Symbol);
+            FormatWithKeyWord(SymbolID);
+            Detail.Process(Symbol);
+        }
 
-        FormatWithKeyWord(SymbolID);
+        _mat.SetColor("_Emissive", Emissive);
 
         AddAction(Action);
         AddLook(() => { SetActionTextMode(!_hasSymbol); });
@@ -48,8 +60,12 @@ public class Console : Interactable
         {
             SetVisible((Player.MainUILogic.Instance.GetHoldingDetail().Name != "" && !_hasSymbol) || _hasSymbol);
         });
+    }
 
-        Detail.Process(Symbol);
+    private void DisableSymbol()
+    {
+        _hasSymbol = false;
+        _mat.SetTexture("_Icon", null);
     }
 
     public void SetDetail(PickupDetail d) => Detail = d;
@@ -61,8 +77,8 @@ public class Console : Interactable
 
         if (_hasSymbol)
         {
-            _hasSymbol = false;
-            _mat.SetTexture("_Icon", null);
+            DisableSymbol();
+            onKeyRemoved?.Invoke();
             Player.MainUILogic.Instance.AddItem(Detail);
         }
         else if(!_hasSymbol && Player.MainUILogic.Instance.GetHoldingDetail().Name != "")
@@ -75,6 +91,11 @@ public class Console : Interactable
             Player.MainUILogic.Instance.RemoveItem(Detail.Name);
             FormatWithKeyWord(SymbolID);
             _particles.Play();
+
+            if(SymbolID == SymbolIDKey)
+            {
+                onKeyAdded?.Invoke();
+            }
         }
     }
 
