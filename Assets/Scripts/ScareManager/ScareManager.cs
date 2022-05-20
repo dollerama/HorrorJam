@@ -49,6 +49,8 @@ public class ScareObject
 
 public class ScareManager : MonoBehaviour
 {
+    public static ScareManager Instance;
+
     [HideInInspector]
     public GameObject Player;
     public Vector3 AreaDimensions;
@@ -66,7 +68,10 @@ public class ScareManager : MonoBehaviour
     private float _RefreshRate = 0;
     private float _RefreshTimer = 0;
 
-    public List<ScareObject> ScareObjects;
+    private void Awake()
+    {
+        Instance = this.GetComponent<ScareManager>();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -105,15 +110,13 @@ public class ScareManager : MonoBehaviour
         Player = GameObject.FindGameObjectWithTag("Player");
     }
 
+    public Vector3 GetHidingSpot()
+    {
+        return PlayerCaster.RandomHiddenSpawnPos();
+    }
+
     public void Tick()
     {
-        for (int i = 0; i < Intensity * 10; i++)
-        {
-            foreach (ScareObject so in ScareObjects)
-            {
-                so.SpawnWithChance(PlayerCaster);
-            }
-        }
     }
 
     public void Update()

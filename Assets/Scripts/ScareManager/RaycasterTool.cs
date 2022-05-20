@@ -80,7 +80,7 @@ public class RaycasterTool : MonoBehaviour
         return _castObjects;
     }
 
-    public List<Vector3> AllHitAdjPositions()
+    public List<Vector3> AllHitAdjPositions(float lookDepth=3)
     {
         List<Vector3> retList = new List<Vector3>();
 
@@ -90,9 +90,9 @@ public class RaycasterTool : MonoBehaviour
         {
             if (_castObjects[i]._hit.collider)
             {
-                for(int k=1; k < 5; k++)
+                for(int k=1; k < lookDepth; k++)
                 {
-                    Vector3 dir = -_castObjects[i]._hit.normal * (k);
+                    Vector3 dir = (_castObjects[i]._hit.point - transform.position).normalized * (k);
                     if(!Physics.CheckSphere(_castObjects[i]._hit.point+dir, 0.1f))
                     {
                         Vector3 pos = _castObjects[i]._hit.point + dir;
@@ -195,7 +195,6 @@ public class RaycasterTool : MonoBehaviour
 
         foreach (Vector3 v in cornerAdj)
         {
-            RaycastHit hit;
             Ray r = new Ray(v, (this.transform.position - v).normalized);
             if (!Utility.IsLookingAtObject(this.transform.forward, this.transform.position, v))
             {
@@ -232,7 +231,7 @@ public class RaycasterTool : MonoBehaviour
     //    if (Logger.Active)
     //    {
     //        if (_castObjects.Count == 0) return;
-            
+
     //        foreach (RaycasterObj r in _castObjects)
     //        {
     //            Gizmos.color = new Color(1, 0, 0, 0.5f);
@@ -246,7 +245,7 @@ public class RaycasterTool : MonoBehaviour
 
     //        List<Vector3> corners = HiddenSpawnPosition();
 
-    //        foreach(Vector3 v in corners)
+    //        foreach (Vector3 v in corners)
     //        {
     //            Gizmos.color = new Color(1, 0, 0, 1);
     //            Gizmos.DrawWireSphere(v, 0.2f);

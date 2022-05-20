@@ -28,13 +28,13 @@ namespace Player
 
         private void Awake()
         {
-            Instance = this;
+            Instance = this.GetComponent<MainUILogic>();
         }
 
         // Start is called before the first frame update
         void Start()
         {
-            HoldID = new PickupDetail { Name = "" };
+            HoldID = new PickupDetail("");
             _inMenu = false;
             _slots = new List<TemplateContainer>();
             _slotsDetailData = new List<System.Action>();
@@ -85,7 +85,7 @@ namespace Player
 
                     //set UI
                     _slots[i].Q<Label>("Name").text = detail.Name;
-                    _slots[i].Q<VisualElement>("Icon").style.backgroundImage = new StyleBackground(detail.Img);
+                    _slots[i].Q<VisualElement>("Icon").style.backgroundImage = new StyleBackground( detail.Img );
                     _slots[i].Q<VisualElement>("ButtonContainer").style.opacity = 1f;
 
                     //detail button action
@@ -137,7 +137,7 @@ namespace Player
 
                     if (HoldID.Name == CornerSlot.Q<Label>("Name").text)
                     {
-                        HoldID = new PickupDetail();
+                        HoldID = new PickupDetail("");
                         HoldID.Name = "";
                     }
 

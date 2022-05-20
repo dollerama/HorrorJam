@@ -49,7 +49,7 @@ public class Console : Interactable
             SetVisible((Player.MainUILogic.Instance.GetHoldingDetail().Name != "" && !_hasSymbol) || _hasSymbol);
         });
 
-        Detail.Img = Sprite.Create(Symbol, new Rect(Vector2.zero, new Vector2(Symbol.width, Symbol.height)), Vector2.zero);
+        Detail.Process(Symbol);
     }
 
     public void SetDetail(PickupDetail d) => Detail = d;
@@ -71,7 +71,7 @@ public class Console : Interactable
 
             _hasSymbol = true;
             SymbolID = Detail.Name;
-            _mat.SetTexture("_Icon", Detail.Img.texture);
+            _mat.SetTexture("_Icon", Detail.GetImg());
             Player.MainUILogic.Instance.RemoveItem(Detail.Name);
             FormatWithKeyWord(SymbolID);
             _particles.Play();
