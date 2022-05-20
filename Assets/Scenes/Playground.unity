@@ -5595,10 +5595,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: 'WallPickup '
       objectReference: {fileID: 0}
-    - target: {fileID: 6815543096748260407, guid: e534f7608df90254fbffc44af76b869e, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 1997ac12310c659408718633e3b1eb99, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e534f7608df90254fbffc44af76b869e, type: 3}
 --- !u!1001 &6529285311700158823

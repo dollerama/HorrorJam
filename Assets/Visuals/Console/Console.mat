@@ -82,7 +82,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Normal:
-        m_Texture: {fileID: 2800000, guid: 2423e36d99003ea47900393526ceadd1, type: 3}
+        m_Texture: {fileID: 2800000, guid: 0e76e34462e78174282037c6ad1d7195, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -146,6 +146,6 @@ Material:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 7.4642644, g: 7.4642644, b: 7.4642644, a: 1}
-    - _Emissive: {r: 0.24896373, g: 1.6410905, b: 10.556064, a: 1}
+    - _Emissive: {r: 0, g: 6.9871097, b: 51.984146, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
