@@ -31,7 +31,7 @@ public class ForcefieldController : MonoBehaviour
     public void ToggleEnable(bool val)
     {
         GetComponent<BoxCollider>().isTrigger = !val;
-        GetComponent<NavMeshObstacle>().enabled = !val;
+        GetComponent<NavMeshObstacle>().enabled = val;
         enabled = val;
     }
 }
